@@ -1,0 +1,209 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject UserManager<Ecommerce.Models.ApplicationUser> UserManager
+@model ECommerce.Models.Order
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h2>حذف طلبيات</h2>
+
+<h3>حدد الطلبية التي ترغب بالغاءها</h3>
+<div>
+    <h4>Order</h4>
+    <br />
+
+    @*Order*@
+    <table class="table table-bordered table-striped table-responsive">
+        <thead>
+            <tr>
+                <th colspan="4">
+                    طلبية
+                </th>
+            </tr>
+        </thead>
+        <thead>
+            <tr>
+                <th>
+                    رقم الطلبية
+                </th>
+                <th>
+                    تاريخها
+                </th>
+                <th>
+                    ملاحظات
+                </th>
+                <th>
+                    الحالة
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    @Model.Id
+                </td>
+                <td>
+                    @Model.OrderDate
+                </td>
+                <td>
+                    @Model.OrderNotes
+                </td>
+                <td>
+                    @Model.OrderStatus
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <br />
+    <br />
+
+    @*Service Provider*@
+    <table class="table table-bordered table-striped table-responsive">
+        <thead>
+            <tr>
+                <th colspan="5">
+                    بائع الخدمة: @Model.Service.Sprovider.CompanyName
+                </th>
+            </tr>
+        </thead>
+        <thead>
+            <tr>
+                <th>
+                    الاسم
+                </th>
+                <th>
+                    رقم الهاتف
+                </th>
+                <th>
+                    Email
+                </th>
+                <th>
+                    العنوان
+                </th>
+                <th>
+                    Image
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    @Model.Service.Sprovider.User.FullName
+                </td>
+                <td>
+                    @Model.Service.Sprovider.User.PhoneNumber
+                </td>
+                <td>
+                    @Model.Service.Sprovider.User.Email
+                </td>
+                <td>
+                    @Model.Service.Sprovider.User.Address
+                </td>
+                <td>
+                    <img src="~/uploads/sprovider/@Model.Service.Sprovider.Image" alt="@Model.Service.Sprovider.CompanyName" style="width:160px; height:160px;" class="img-thumbnail" />
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <br />
+    <br />
+
+    @*Service*@
+    <table class="table table-bordered table-striped table-responsive">
+        <thead>
+            <tr>
+                <th colspan="4">
+                    الخدمة
+                </th>
+            </tr>
+        </thead>
+        <thead>
+            <tr>
+                <th>
+                    الاسم
+                </th>
+                <th>
+                    رقم الهاتف
+                </th>
+                <th>
+                    زمن التسليم
+                </th>
+                <th>
+                    صورة
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    @Model.Service.Name
+                </td>
+                <td>
+                    @Model.Service.Description
+                </td>
+                <td>
+                    @Model.Service.ExpectedTime
+                </td>
+                <td>
+                    <img src="~/uploads/service/@Model.Service.Image" alt="@Model.Service.Name" style="width:160px; height:160px;" class="img-thumbnail" />
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <br />
+    <br />
+
+    @*Customer*@
+    <table class="table table-bordered table-striped table-responsive">
+        <thead>
+            <tr>
+                <th colspan="4">
+                    الزبون
+                </th>
+            </tr>
+        </thead>
+        <thead>
+            <tr>
+                <th>
+                    الاسم
+                </th>
+                <th>
+                    رقم الهاتف
+                </th>
+                <th>
+                    الايميل
+                </th>
+                <th>
+                    العنوان
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    @Model.Customer.FullName
+                </td>
+                <td>
+                    @Model.Customer.PhoneNumber
+                </td>
+                <td>
+                    @Model.Customer.Email
+                </td>
+                <td>
+                    @Model.Customer.Address
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-action="CustomerOrders" asp-route-customerId="@UserManager.GetUserId(User)">عودة للقائمة</a>
+    </form>
+</div>

@@ -1,0 +1,85 @@
+﻿@model IEnumerable<ECommerce.Models.Service>
+
+@{
+    ViewData["Title"] = "CompanyServices";
+}
+<h1>نتائج البحث:</h1>
+<br />
+@{
+    bool exist = false;
+    if (ViewBag.Sproviders != null)
+    {
+        exist = true;
+
+        <div class="panel panel-default">
+            <div class="panel-heading"><h2>مقدمي الخدمات</h2></div>
+            <div class="row panel-body" style="padding-left:40px;">
+                @foreach (var item in ViewBag.Sproviders)
+                {
+                    <div class="col-md-3 thumbnail" style="height: 280px; width: 250px; margin: 10px; ">
+                        <a asp-controller="Services" asp-action="CompanyServices" asp-route-SproviderId="@item.Id" style="text-decoration:none;color:black">
+                            <img src="~/uploads/sprovider/@item.Image" style="height:175px; width:200px;" class="img-circle img-thumbnail" />
+                            <h3 style="text-align:center">@item.CompanyName</h3>
+                        </a>
+                        <div style="margin: auto; width:50%;">
+                            @*<span>Rate: </span>*@
+                            @{
+                                var counter = 0;
+                                for (int i = 0; i < item.Rating; i += 20)
+                                {
+                                    counter++;
+                                    <i class="fa fa-star" style="color:goldenrod; align-content:center"></i>
+                                }
+                                for (int i = 0; i < 5 - counter; i++)
+                                {
+                                    <i class="fa fa-star"></i>
+                                }
+                            }
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+        <br />
+        <br />
+    }
+
+
+    if (@Model.FirstOrDefault() != null)
+    {
+        exist = true;
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h2>الخدمات</h2>
+                <br />
+            </div>
+            <div class="row panel-body" style="padding-left:40px;">
+                @foreach (var item in Model)
+                {
+                    <div class="col-md-3 thumbnail" style="height: 280px; width: 250px; margin: 10px; ">
+                        <a asp-controller="Services" asp-action="Details" asp-route-id="@item.Id" style="text-decoration:none;color:black">
+                            <img src="~/uploads/service/@item.Image" style="height:175px; width:200px;" />
+                            <h3 style="text-align:center">@item.Name</h3>
+                        </a>
+
+                        <h4>
+                            السعر: <b>@item.Price</b>
+                        </h4>
+                        <br />
+                    </div>
+                }
+            </div>
+        </div>
+        <br />
+    }
+
+    if (exist == false)
+    {
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h2>فارغ</h2>
+            </div>
+        </div>
+    }
+}

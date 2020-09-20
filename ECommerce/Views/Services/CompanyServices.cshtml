@@ -1,0 +1,42 @@
+﻿@model IEnumerable<ECommerce.Models.Service>
+
+@{
+    ViewData["Title"] = "CompanyServices";
+}
+<br />
+
+@if (@Model.FirstOrDefault() != null)
+{
+    <div class="panel panel-default">
+        <div class="panel-heading">
+
+            <div>
+                <img src="~/uploads/sprovider/@Model.FirstOrDefault().Sprovider.Image" style="height:175px; width:200px;" class="img-circle img-thumbnail" />
+            </div>
+            <br />
+        </div>
+        <div class="row panel-body" style="padding-left:40px;">
+            @foreach (var item in Model)
+            {
+                <div class="col-md-3 thumbnail" style="height: 280px; width: 250px; margin: 10px; ">
+                    <a asp-controller="Services" asp-action="Details" asp-route-id="@item.Id" style="text-decoration:none;color:black">
+                        <img src="~/uploads/service/@item.Image" style="height:175px; width:200px;" />
+                        <h3 style="text-align:center">@item.Name</h3>
+                    </a>
+                    <h4>
+                        السعر: <b>@item.Price</b>
+                    </h4>
+                    <br />
+                </div>
+            }
+        </div>
+    </div>
+}
+else
+{
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h2>فارغ</h2>
+        </div>
+    </div>
+}

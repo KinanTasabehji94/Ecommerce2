@@ -18,16 +18,19 @@
         <div class="row panel-body" style="padding-left:40px;">
             @foreach (var item in Model)
             {
-                <div class="col-md-3 thumbnail" style="height: 280px; width: 250px; margin: 10px; ">
-                    <a asp-controller="Services" asp-action="Details" asp-route-id="@item.Id" style="text-decoration:none;color:black">
-                        <img src="~/uploads/service/@item.Image" style="height:175px; width:200px;" />
-                        <h3 style="text-align:center">@item.Name</h3>
-                    </a>
-                    <h4>
-                        السعر: <b>@item.Price</b>
-                    </h4>
-                    <br />
-                </div>
+            <div class="col-md-3 thumbnail" style="height: 280px; width: 250px; margin: 10px; ">
+                <a asp-controller="Services" asp-action="Details" asp-route-id="@item.Id" style="text-decoration:none;color:black">
+                    <img src="~/uploads/service/@item.Image" style="height:175px; width:200px;" />
+                    <h3 style="text-align:center">@item.Name</h3>
+                </a>
+                <h4>
+                    السعر: <b>@item.Price</b>  <a asp-action="Compare" asp-route-searchName1="@item.Name" asp-route-searchName2=" " class="btn btn-default left">Compare</a>
+
+                </h4>
+                <br />
+                   
+            </div>
+           
             }
         </div>
     </div>

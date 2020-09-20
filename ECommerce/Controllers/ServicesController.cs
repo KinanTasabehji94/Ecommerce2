@@ -25,7 +25,7 @@ namespace ECommerce.Controllers
         private readonly ISprovider sproviderRepository;
         private readonly IHostingEnvironment hostingEnvironment;
 
-        public ServicesController( IService serviceRepository, ISprovider sproviderRepository, IHostingEnvironment hostingEnvironment)
+        public ServicesController(IService serviceRepository, ISprovider sproviderRepository, IHostingEnvironment hostingEnvironment)
         {
             this.serviceRepository = serviceRepository;
             this.sproviderRepository = sproviderRepository;
@@ -56,6 +56,27 @@ namespace ECommerce.Controllers
                 return NotFound();
             }
             return View(service);
+        }
+
+  
+   
+
+        // GET: Services/Compare/5
+        public ActionResult Compare(string searchName1, string searchName2)
+        {
+            ServiceCompareViewModel services = new ServiceCompareViewModel();
+            if (!string.IsNullOrWhiteSpace(searchName1))
+            {
+                var result1 = serviceRepository.List().Where(a => a.Name.Contains(searchName1)).FirstOrDefault();
+                services.FirstService = result1;
+            }
+            if (!string.IsNullOrWhiteSpace(searchName2))
+            {
+                var result2 = serviceRepository.List().Where(a => a.Name.Contains(searchName2)).FirstOrDefault();
+                services.SecondService = result2;
+            }
+            ViewBag.Services = serviceRepository.List();
+            return View(services);
         }
 
         // GET: Services/Create

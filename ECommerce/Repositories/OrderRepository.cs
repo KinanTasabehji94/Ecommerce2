@@ -12,15 +12,13 @@ namespace ECommerce.Repositories
     public class OrderRepository : IOrder
     {
         myDbContext db;
-        private readonly IService serviceRepository;
-        private readonly ISprovider sproviderRepository;
+        private readonly IDispute disputeRepository;
 
-        public OrderRepository(myDbContext _db, IService serviceRepository, ISprovider sproviderRepository)
+        public OrderRepository(myDbContext _db, IDispute disputeRepository)
         {
+           
             db = _db;
-            this.serviceRepository = serviceRepository;
-            this.sproviderRepository = sproviderRepository;
-
+            this.disputeRepository = disputeRepository;
         }
         public void Add(Order entity)
         {
@@ -30,6 +28,11 @@ namespace ECommerce.Repositories
         public void Delete(int id)
         {
             var order = Find(id);
+            var disputes = disputeRepository.List().Where(x => x.OrderId == id);
+            foreach (var item in disputes)
+            {
+                disputeRepository.Delete(item.Id);
+            }
             db.Order.Remove(order);
             db.SaveChanges();
         }

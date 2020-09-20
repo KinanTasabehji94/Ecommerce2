@@ -11,9 +11,12 @@ namespace Ecommerce.Repositories
     public class CategoryRepository : ICategory
     {
         myDbContext db;
-        public CategoryRepository(myDbContext _db)
+        private readonly ISprovider sProviderRepository;
+
+        public CategoryRepository(myDbContext _db, ISprovider sProviderRepository)
         {
             db = _db;
+            this.sProviderRepository = sProviderRepository;
         }
         public void Add(Category entity)
         {
@@ -24,7 +27,11 @@ namespace Ecommerce.Repositories
         public void Delete(int id)
         {
             var category = Find(id);
-
+            var sProviders = sProviderRepository.List().Where(x => x.CategoryId == id);
+            foreach (var item in sProviders)
+            {
+                sProviderRepository.Delete(item.Id);
+            }
             db.Category.Remove(category);
             db.SaveChanges();
         }

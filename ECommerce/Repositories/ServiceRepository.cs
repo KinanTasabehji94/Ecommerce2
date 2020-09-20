@@ -1,6 +1,7 @@
 ﻿using Ecommerce.Models;
 using Ecommerce.Repositories.Interfaces;
 using ECommerce.Models;
+using ECommerce.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -13,9 +14,12 @@ namespace Ecommerce.Repositories
     {
 
         myDbContext db;
-        public ServiceRepository(myDbContext _db)
+        private readonly IOrder orderRepository;
+
+        public ServiceRepository(myDbContext _db, IOrder orderRepository)
         {
             db = _db;
+            this.orderRepository = orderRepository;
         }
 
         public void Add(Service entity)
@@ -33,6 +37,12 @@ namespace Ecommerce.Repositories
         public void Delete(int id)
         {
             var service = Find(id);
+
+            var orders = orderRepository.List().Where(x => x.ServiceId == id);
+            foreach (var item in orders)
+            {
+                orderRepository.Delete(item.Id);
+            }
 
             db.Service.Remove(service);
             db.SaveChanges();

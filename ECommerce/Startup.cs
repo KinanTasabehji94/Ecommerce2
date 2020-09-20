@@ -59,6 +59,8 @@ namespace ECommerce
             services.AddScoped<IService, ServiceRepository>();
             services.AddScoped<IOrder, OrderRepository>();
             services.AddScoped<IDispute, DisputeRepository>();
+            services.AddScoped<IUser, UserRepository>();
+            services.AddScoped<IUserClaims, UserClaimsRepository>();
 
             services.AddAuthorization(options =>
             {

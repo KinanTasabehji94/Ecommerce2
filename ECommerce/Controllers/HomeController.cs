@@ -29,6 +29,10 @@ namespace ECommerce.Controllers
             var categories = categoryRepository.List();
             return View(categories);
         }
+        public IActionResult Chat()
+        {
+            return View();
+        }
         public ActionResult Search()
         {
             return View();

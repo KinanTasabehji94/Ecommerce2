@@ -20,6 +20,7 @@ using ECommerce.Repositories.Interfaces;
 using ECommerce.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
+using ECommerce.Hubs;
 
 namespace ECommerce
 {
@@ -61,6 +62,7 @@ namespace ECommerce
             services.AddScoped<IDispute, DisputeRepository>();
             services.AddScoped<IUser, UserRepository>();
             services.AddScoped<IUserClaims, UserClaimsRepository>();
+            services.AddSignalR();
 
             services.AddAuthorization(options =>
             {
@@ -91,6 +93,11 @@ namespace ECommerce
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
+
+            app.UseSignalR(routes =>
+            {
+                routes.MapHub<ChatHub>("/chatHub");
+            });
 
             app.UseAuthentication();
 

@@ -3,6 +3,7 @@ using ECommerce.Models;
 using ECommerce.Repositories.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -49,10 +50,21 @@ namespace ECommerce.Repositories
             return user;
         }
 
+        public AspNetUsers GetUserDetails(string id)
+        {
+            var user =  db.AspNetUsers.Find(id);
+            return user;
+        }
+
         public IList<AspNetUsers> List()
         {
-            return db.AspNetUsers.ToList();
+            return db.AspNetUsers.Include(d=>d.AspNetUserClaims).ToList();
         }
+        public IList<AspNetUserClaims> CustomerServiceList()
+        {
+            return db.AspNetUserClaims.Include(d => d.User).Where(d=>d.ClaimType== "CustomerService").ToList();
+        }
+
         public void Update(string id, AspNetUsers entity)
         {
             db.Update(entity);

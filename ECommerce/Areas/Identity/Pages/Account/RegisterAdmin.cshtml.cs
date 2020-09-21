@@ -140,7 +140,7 @@ namespace Ecommerce.Areas.Identity.Pages.Account
                         await UserManager.AddClaimAsync(user, new Claim(" Admin_CustomerService", "true"));
 
                     }
-                    else if (user.UserType == "Customer Service")
+                    else if (user.UserType == "CustomerService")
                     {
                         await UserManager.AddClaimAsync(user, new Claim("CustomerService", "true"));
                         await UserManager.AddClaimAsync(user, new Claim("Admin_CustomerService", "true"));

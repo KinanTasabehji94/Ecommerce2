@@ -14,5 +14,7 @@ namespace ECommerce.Repositories.Interfaces
         void Update(string id, AspNetUsers entity);
         Task<string> Delete(string id);
         Task<ApplicationUser> Find(string id);
+        IList<AspNetUserClaims> CustomerServiceList();
+        AspNetUsers GetUserDetails(string id);
     }
 }

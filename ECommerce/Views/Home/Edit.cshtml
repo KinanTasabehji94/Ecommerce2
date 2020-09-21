@@ -1,0 +1,146 @@
+﻿@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2>Edit</h2>
+
+<h4>@ViewBag.User.FullName</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                @{
+                    List<string> s = new List<string>();
+                    foreach (var item in ViewBag.UserClaims)
+                    {
+                        s.Add(item.ClaimType);
+                    }
+
+                    if (s.Contains("Admin"))
+                    {
+                        <div class="form-group">
+                            <label class="container">
+                                <input name="Admin" type="checkbox" value="true" id="Admin" checked/>
+                                <span class="checkmark"></span>
+                                Admin
+                            </label>
+                        </div>
+
+                    }
+                    else
+                    {
+                        <div class="form-group">
+                            <label class="container">
+                                <input name="Admin" type="checkbox" value="true" id="Admin">
+                                <span class="checkmark"></span>
+                                Admin
+                            </label>
+                        </div>
+                    }
+
+                    if (s.Contains("CustomerService"))
+                    {
+                        <div class="form-group">
+                            <label class="container">
+                                <input name="CustomerService" type="checkbox" id="CustomerService" checked>
+                                <span class="checkmark"></span>
+                                CustomerService
+                            </label>
+                        </div>
+
+                    }
+                    else
+                    {
+                        <div class="form-group">
+                            <label class="container">
+                                <input name="CustomerService" type="checkbox" id="CustomerService">
+                                <span class="checkmark"></span>
+                                CustomerService
+                            </label>
+                        </div>
+                    }
+
+                    if (s.Contains("Customer"))
+                    {
+                        <div class="form-group">
+                            <label class="container">
+                                <input name="Customer" type="checkbox" value="true" id="Customer" checked>
+                                <span class="checkmark"></span>
+                                Customer
+                            </label>
+                        </div>
+
+                    }
+                    else
+                    {
+                        <div class="form-group">
+                            <label class="container">
+                                <input name="Customer" type="checkbox" value="true" id="Customer">
+                                <span class="checkmark"></span>
+                                Customer
+                            </label>
+                        </div>
+                    }
+
+                    if (s.Contains("ServiceProvider"))
+                    {
+                        <div class="form-group">
+                            <label class="container">
+                                <input name="ServiceProvider" type="checkbox" value="true" id="ServiceProvider" checked>
+                                <span class="checkmark"></span>
+                                ServiceProvider
+                            </label>
+                        </div>
+
+                    }
+                    else
+                    {
+                        <div class="form-group">
+                            <label class="container">
+                                <input name="ServiceProvider" type="checkbox" value="true" id="ServiceProvider">
+                                <span class="checkmark"></span>
+                                ServiceProvider
+                            </label>
+                        </div>
+                    }
+
+                    if (s.Contains("Admin_CustomerService"))
+                    {
+                        <div class="form-group">
+                            <label class="container">
+                                <input name="Admin_CustomerService" type="checkbox" value="true" id="Admin_CustomerService" checked>
+                                <span class="checkmark"></span>
+                                Admin_CustomerService
+                            </label>
+                        </div>
+
+                    }
+                    else
+                    {
+                        <div class="form-group">
+                            <label class="container">
+                                <input name="Admin_CustomerService" type="checkbox" value="true" id="Admin_CustomerService">
+                                <span class="checkmark"></span>
+                                Admin_CustomerService
+                            </label>
+                        </div>
+                    }
+
+                }
+
+
+            </div>
+
+                            <div class="form-group">
+                                <input asp-route-UserID="@ViewBag.User.Id" type="submit" value="Save" class="btn btn-default" />
+                            </div>
+</form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

@@ -26,6 +26,7 @@ namespace ECommerce.Controllers
             this.sproviderRepository = sproviderRepository;
         }
 
+        [Authorize(Policy = "ManageOrders")]
         public ActionResult Index()
         {
             var orders = orderRepository.List();
@@ -42,7 +43,6 @@ namespace ECommerce.Controllers
         }
 
         [Authorize(Policy = "ServiceProvider")]
-
         public ActionResult ServiceProviderOrders(string sproviderId)
         {
             var orders = orderRepository.List().Where(x => x.Service.Sprovider.User.Id == sproviderId);
@@ -66,6 +66,7 @@ namespace ECommerce.Controllers
         [Authorize(Policy = "Customer")]
         public ActionResult Create(int myServiceID)
         {
+            ViewBag.ServiceID = myServiceID;
             TempData["ServiceID"] = myServiceID;
             return View();
         }
@@ -88,12 +89,11 @@ namespace ECommerce.Controllers
                 orderRepository.Add(order);
                 return RedirectToAction(nameof(CustomerOrders), new { customerId = order.CustomerId });
             }
-
             return View();
         }
 
         // GET: Orders/Edit/5
-        //[Authorize(Policy = "ServiceProvider")]
+        [Authorize(Policy = "ServiceProvider")]
         public ActionResult Edit(int id)
         {      
             var order = orderRepository.Find(id);
@@ -108,7 +108,7 @@ namespace ECommerce.Controllers
         // POST: Orders/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        //[Authorize(Policy = "ServiceProvider")]
+        [Authorize(Policy = "ServiceProvider")]
         public ActionResult Edit(int id, Order order)
         {
             if (id != order.Id)
@@ -134,7 +134,6 @@ namespace ECommerce.Controllers
                     return RedirectToAction(nameof(CustomerOrders), new { customerId = oldOrder.CustomerId });
                 }
             }
-
        
             return View(order);
         }

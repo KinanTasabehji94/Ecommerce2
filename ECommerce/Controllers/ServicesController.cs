@@ -58,9 +58,6 @@ namespace ECommerce.Controllers
             return View(service);
         }
 
-  
-   
-
         // GET: Services/Compare/5
         public ActionResult Compare(string searchName1, string searchName2)
         {
@@ -135,8 +132,8 @@ namespace ECommerce.Controllers
             return View();
         }
 
-        [Authorize(Policy = "ServiceProvider")]
         // GET: Services/Edit/5
+        [Authorize(Policy = "ServiceProvider")]
         public ActionResult Edit(int id)
         {
             var service = serviceRepository.Find(id);
@@ -148,10 +145,10 @@ namespace ECommerce.Controllers
             return View(service);
         }
 
-        [Authorize(Policy = "ServiceProvider")]
         // POST: Services/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Policy = "ServiceProvider")]
         public async Task<ActionResult> Edit(int id, Service service)
         {
             if (ModelState.IsValid)
@@ -204,6 +201,7 @@ namespace ECommerce.Controllers
 
 
         // GET: Services/Delete/5
+        [Authorize(Policy = "ServiceProvider")]
         public ActionResult Delete(int id)
         {
             var service = serviceRepository.Find(id);
@@ -214,6 +212,7 @@ namespace ECommerce.Controllers
         // POST: Services/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Policy = "ServiceProvider")]
         public ActionResult DeleteConfirmed(int id)
         {
             var service = serviceRepository.Find(id);

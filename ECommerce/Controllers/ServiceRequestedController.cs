@@ -19,7 +19,7 @@ namespace ECommerce.Controllers
             this.serviceRequestedRepository = serviceRequestedRepository;
         }
         // GET: ServiceRequestedController
-
+        [Authorize(Policy = "ManageServiceRequested")]
         public ActionResult Index()
         {
             var requested = serviceRequestedRepository.List();
@@ -27,6 +27,7 @@ namespace ECommerce.Controllers
         }
 
         // GET: ServiceRequestedController/Details/5
+        [Authorize(Policy = "ManageServiceRequested")]
         public ActionResult Details(int id)
         {
             var service = serviceRequestedRepository.Find(id);
@@ -35,7 +36,6 @@ namespace ECommerce.Controllers
 
         // GET: ServiceRequestedController/Create
          [Authorize(Policy = "Customer")]
-
         public ActionResult Create()
         {
             return View();
@@ -45,7 +45,6 @@ namespace ECommerce.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Policy = "Customer")]
-
         public ActionResult Create(ServiceRequested service)
         {
             if (ModelState.IsValid)
@@ -58,6 +57,7 @@ namespace ECommerce.Controllers
         }
 
         // GET: ServiceRequestedController/Edit/5
+        [Authorize(Policy = "ManageServiceRequested")]
         public ActionResult Edit(int id)
         {
             var service = serviceRequestedRepository.Find(id);
@@ -67,6 +67,7 @@ namespace ECommerce.Controllers
         // POST: ServiceRequestedController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Policy = "ManageServiceRequested")]
         public ActionResult Edit(int id, ServiceRequested service)
         {
             if (ModelState.IsValid)
@@ -84,6 +85,7 @@ namespace ECommerce.Controllers
         }
 
         // GET: ServiceRequestedController/Delete/5
+        [Authorize(Policy = "ManageServiceRequested")]
         public ActionResult Delete(int id)
         {
             var service = serviceRequestedRepository.Find(id);
@@ -94,6 +96,7 @@ namespace ECommerce.Controllers
         [HttpPost, ActionName("Delete")]
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Policy = "ManageServiceRequested")]
         public ActionResult DeleteConfirmed(int id)
         {
             serviceRequestedRepository.Delete(id);

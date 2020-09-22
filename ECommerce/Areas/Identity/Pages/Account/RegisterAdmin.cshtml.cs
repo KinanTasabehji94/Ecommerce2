@@ -135,17 +135,17 @@ namespace Ecommerce.Areas.Identity.Pages.Account
                      
                     if (user.UserType == "Admin")
                     {
-                        await UserManager.AddClaimAsync(user, new Claim("Admin", "true"));
-                        await UserManager.AddClaimAsync(user, new Claim("CustomerService", "true"));
-                        await UserManager.AddClaimAsync(user, new Claim(" Admin_CustomerService", "true"));
-
+                        await UserManager.AddClaimAsync(user, new Claim("ManageCategories", "true"));
+                        await UserManager.AddClaimAsync(user, new Claim("ManageDisputes", "true"));
+                        await UserManager.AddClaimAsync(user, new Claim("ManageUsers", "true"));
+                        await UserManager.AddClaimAsync(user, new Claim("ManageOrders", "true"));
+                        await UserManager.AddClaimAsync(user, new Claim("ManageSproviders", "true"));
+                        await UserManager.AddClaimAsync(user, new Claim("ManageServiceRequested", "true"));
+                        await UserManager.AddClaimAsync(user, new Claim("ManageClaims", "true"));
                     }
                     else if (user.UserType == "CustomerService")
                     {
-                        await UserManager.AddClaimAsync(user, new Claim("CustomerService", "true"));
-                        await UserManager.AddClaimAsync(user, new Claim("Admin_CustomerService", "true"));
-
-                        
+                        await UserManager.AddClaimAsync(user, new Claim("ManageDisputes", "true"));
                     }
 
                     _logger.LogInformation("User created a new account with password.");

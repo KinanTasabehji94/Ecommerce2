@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace ECommerce.Controllers
 {
+    [Authorize(Policy = "ManageCategories")]
     public class CategoriesController : Controller
     {
         private readonly ICategory categoryRepository;
@@ -25,7 +26,6 @@ namespace ECommerce.Controllers
             this.hostingEnvironment = hostingEnvironment;
         }
 
-        [Authorize(Policy = "Admin")]
         // GET: Categories
         public ActionResult Index()
         {
@@ -40,7 +40,6 @@ namespace ECommerce.Controllers
             return View(categories);
         }
 
-        [Authorize(Policy = "Admin")]
         // GET: Categories/Details/5
         public ActionResult Details(int id)
         {
@@ -49,7 +48,6 @@ namespace ECommerce.Controllers
             return View(category);
         }
 
-        [Authorize(Policy = "Admin")]
         // GET: Categories/Create
         public ActionResult Create()
         {
@@ -59,7 +57,6 @@ namespace ECommerce.Controllers
         // POST: Categories/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Policy = "Admin")]
         public async Task<ActionResult> Create(CategoryViewModel categoryViewModel)
         {
             if (ModelState.IsValid)
@@ -101,7 +98,6 @@ namespace ECommerce.Controllers
         }
 
         // GET: Categories/Edit/5
-        [Authorize(Policy = "Admin")]
         public ActionResult Edit(int id)
         {
             var category = categoryRepository.Find(id);
@@ -111,7 +107,6 @@ namespace ECommerce.Controllers
         // POST: Categories/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Policy = "Admin")]
         public async Task<ActionResult> Edit(int id, Category category)
         {
             if (ModelState.IsValid)
@@ -161,7 +156,6 @@ namespace ECommerce.Controllers
         }
 
         // GET: Categories/Delete/5
-        [Authorize(Policy = "Admin")]
         public ActionResult Delete(int id)
         {
             var category = categoryRepository.Find(id);
@@ -172,7 +166,6 @@ namespace ECommerce.Controllers
         // POST: Categories/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        [Authorize(Policy = "Admin")]
         public ActionResult DeleteConfirmed(int id)
         {
             try

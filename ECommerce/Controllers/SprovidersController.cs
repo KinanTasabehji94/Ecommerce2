@@ -27,12 +27,13 @@ namespace ECommerce.Controllers
         }
 
         // GET: Sproviders
-        [Authorize(Policy = "Admin_CustomerService")]
+        [Authorize(Policy = "ManageSproviders")]
         public ActionResult Index()
         {
             var sproviders = sproviderRepository.List();
             return View(sproviders);
         }
+
         public ActionResult CategoryCompanies(int catId)
         {
             var sProviders = sproviderRepository.List().Where(x => x.CategoryId == catId);
@@ -41,7 +42,6 @@ namespace ECommerce.Controllers
         }
 
         // GET: Sproviders/Details/5
-        [Authorize(Policy = "Admin_CustomerService")]
         public ActionResult Details(int id)
         {
             var sprovider = sproviderRepository.Find(id);
@@ -53,7 +53,7 @@ namespace ECommerce.Controllers
         }
 
         // GET: Sproviders/Edit/5
-        [Authorize(Policy = "Admin_CustomerService")]
+        [Authorize(Policy = "ManageSproviders")]
         public ActionResult Edit(int id)
         {
             Sprovider sprovider = sproviderRepository.Find(id);
@@ -65,6 +65,7 @@ namespace ECommerce.Controllers
         // POST: Sproviders/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Policy = "ManageSproviders")]
         public async Task<IActionResult> Edit(int id, Sprovider sprovider)
         {
             if (ModelState.IsValid)
@@ -112,6 +113,7 @@ namespace ECommerce.Controllers
         }
 
         // GET: Sproviders/Delete/5
+        [Authorize(Policy = "ManageSproviders")]
         public ActionResult Delete(int id)
         {
             var sprovider = sproviderRepository.Find(id);
@@ -122,6 +124,7 @@ namespace ECommerce.Controllers
         // POST: Sproviders/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Policy = "ManageSproviders")]
         public ActionResult DeleteConfirmed(int id)
         {
             try

@@ -14,9 +14,10 @@
 
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
-        <link rel="stylesheet" href="~/css/site.css" />
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-rtl.min.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="~/css/site.css" />
+
 
     </environment>
     <environment exclude="Development">
@@ -43,43 +44,60 @@
 
                 <ul class="nav navbar-nav">
                     <li><a asp-area="" asp-controller="Home" asp-action="Index">الرئيسية</a></li>
-                    @if ((await AuthorizationService.AuthorizeAsync(User, "Admin_CustomerService")).Succeeded)
+
+                    @if ((await AuthorizationService.AuthorizeAsync(User, "ManageDisputes")).Succeeded)
                     {
-                        <li><a asp-area="" asp-controller="Categories" asp-action="Index">فئات الخدمات</a></li>
-                        <li><a asp-area="" asp-controller="sproviders" asp-action="Index">بائعي الخدمات</a></li>
-                        <li><a asp-area="" asp-controller="Orders" asp-action="Index">طلبيات </a></li>
-                        <li><a asp-area="" asp-controller="Disputes" asp-action="Index">منازعات</a></li>
-                        <li><a asp-area="" asp-controller="Home" asp-action="Chat">تواصل معنا</a></li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">إدارة الموقع <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                @if ((await AuthorizationService.AuthorizeAsync(User, "ManageCategories")).Succeeded)
+                                {
+                                    <li><a asp-area="" asp-controller="Categories" asp-action="Index">إدارة الفئات</a></li>
+                                }
+                                @if ((await AuthorizationService.AuthorizeAsync(User, "ManageSproviders")).Succeeded)
+                                {
+                                    <li><a asp-area="" asp-controller="sproviders" asp-action="Index">إدارة مقدمي الخدمات</a></li>
+                                }
+                                @if ((await AuthorizationService.AuthorizeAsync(User, "ManageOrders")).Succeeded)
+                                {
+                                    <li><a asp-area="" asp-controller="Orders" asp-action="Index">إدارة طلبيات </a></li>
+                                }
+                                @if ((await AuthorizationService.AuthorizeAsync(User, "ManageDisputes")).Succeeded)
+                                {
+                                    <li><a asp-area="" asp-controller="Disputes" asp-action="Index">إدارة منازعات</a></li>
+                                }
+                                @if ((await AuthorizationService.AuthorizeAsync(User, "ManageClaims")).Succeeded)
+                                {
+                                    <li><a asp-area="" asp-controller="Home" asp-action="IndexCS">إدارة الصلاحيات</a></li>
+                                }
+                                @if ((await AuthorizationService.AuthorizeAsync(User, "ManageUsers")).Succeeded)
+                                {
+                                    <li><a asp-area="" asp-controller="Users" asp-action="Index">إدارة المستخدمين</a></li>
+                                }
+                                @if ((await AuthorizationService.AuthorizeAsync(User, "ManageServiceRequested")).Succeeded)
+                                {
+                                    <li><a asp-area="" asp-controller="ServiceRequested" asp-action="Index">إدارة الخدمات المطلوبة </a></li>
+                                }
+                            </ul>
+                        </li>
                     }
-                    else if ((await AuthorizationService.AuthorizeAsync(User, "Customer")).Succeeded)
+
+                    @if ((await AuthorizationService.AuthorizeAsync(User, "Customer")).Succeeded)
                     {
                         <li><a href="/#Categories">فئات الخدمات</a></li>
                         <li><a asp-area="" asp-controller="Orders" asp-action="CustomerOrders" asp-route-customerId="@UserManager.GetUserId(User)">طلبيات</a></li>
                         <li><a asp-area="" asp-controller="Disputes" asp-action="CustomerDisputes" asp-route-customerId="@UserManager.GetUserId(User)">منازعات</a></li>
-                        <li><a asp-area="" asp-controller="Home" asp-action="Chat">تواصل معنا</a></li>
                     }
-                    else if ((await AuthorizationService.AuthorizeAsync(User, "ServiceProvider")).Succeeded)
+                    @if ((await AuthorizationService.AuthorizeAsync(User, "ServiceProvider")).Succeeded)
                     {
                         var SproviderId = SproviderRepository.List().Where(x => x.UserId == UserManager.GetUserId(User)).FirstOrDefault().Id;
 
                         <li><a asp-area="" asp-controller="Services" asp-action="Index" asp-route-SproviderId="@SproviderId">الخدمات</a></li>
-
                         <li><a asp-area="" asp-controller="Orders" asp-action="ServiceProviderOrders" asp-route-SproviderId="@UserManager.GetUserId(User)">الطلبيات</a></li>
-
-                        <li><a asp-area="" asp-controller="Disputes" asp-action="CompanyDisputes" asp-route-SproviderId="@UserManager.GetUserId(User)">منازعات</a></li>
+                        <li><a asp-area="" asp-controller="Disputes" asp-action="CompanyDisputes" asp-route-SproviderId="@UserManager.GetUserId(User)">المنازعات</a></li>
                     }
-                    else
-                    {
-                        <li><a href="/#Categories">فئات الخدمات</a></li>
-                    }
-                    <li id="Search">
-                        @using (Html.BeginForm("Search", "Home", FormMethod.Post))
-                        {
-                            <input type="text" name="searchName" id="SearchName" placeholder="ابحث عن (مزود خدمة/ خدمة)">
-                            <i class="glyphicon glyphicon-search"></i>
 
-                        }
-                    </li>
+                    <li><a asp-area="" asp-controller="Home" asp-action="Chat">تواصل معنا</a></li>
                 </ul>
                 <partial name="_LoginPartial" />
             </div>

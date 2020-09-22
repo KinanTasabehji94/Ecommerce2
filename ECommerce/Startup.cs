@@ -68,11 +68,15 @@ namespace ECommerce
 
             services.AddAuthorization(options =>
             {
-                options.AddPolicy("Admin", policy => policy.RequireClaim("Admin", "true"));
-                options.AddPolicy("CustomerService", policy => policy.RequireClaim("CustomerService", "true"));
-                options.AddPolicy("ServiceProvider", policy => policy.RequireClaim("ServiceProvider", "true"));
+                options.AddPolicy("ManageCategories", policy => policy.RequireClaim("ManageCategories", "true"));
+                options.AddPolicy("ManageDisputes", policy => policy.RequireClaim("ManageDisputes", "true"));
+                options.AddPolicy("ManageUsers", policy => policy.RequireClaim("ManageUsers", "true"));
+                options.AddPolicy("ManageOrders", policy => policy.RequireClaim("ManageOrders", "true"));
+                options.AddPolicy("ManageSproviders", policy => policy.RequireClaim("ManageSproviders", "true"));
+                options.AddPolicy("ManageServiceRequested", policy => policy.RequireClaim("ManageServiceRequested", "true"));
+                options.AddPolicy("ManageClaims", policy => policy.RequireClaim("ManageClaims", "true"));
                 options.AddPolicy("Customer", policy => policy.RequireClaim("Customer", "true"));
-                options.AddPolicy("Admin_CustomerService", policy => policy.RequireClaim("Admin_CustomerService", "true"));
+                options.AddPolicy("ServiceProvider", policy => policy.RequireClaim("ServiceProvider", "true"));
             });
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
@@ -127,17 +131,33 @@ namespace ECommerce
                 await UserManager.CreateAsync(Admin, "P@ssw0rd");
             }
             var claimList1 = (await UserManager.GetClaimsAsync(Admin)).Select(p => p.Type);
-            if (!claimList1.Contains("Admin"))
+            if (!claimList1.Contains("ManageCategories"))
             {
-                await UserManager.AddClaimAsync(Admin, new Claim("Admin", "true"));
+                await UserManager.AddClaimAsync(Admin, new Claim("ManageCategories", "true"));
             }
-            if (!claimList1.Contains("CustomerService"))
+            if (!claimList1.Contains("ManageOrders"))
             {
-                await UserManager.AddClaimAsync(Admin, new Claim("CustomerService", "true"));
+                await UserManager.AddClaimAsync(Admin, new Claim("ManageOrders", "true"));
             }
-            if (!claimList1.Contains("Admin_CustomerService"))
+            if (!claimList1.Contains("ManageSproviders"))
             {
-                await UserManager.AddClaimAsync(Admin, new Claim("Admin_CustomerService", "true"));
+                await UserManager.AddClaimAsync(Admin, new Claim("ManageSproviders", "true"));
+            }
+            if (!claimList1.Contains("ManageDisputes"))
+            {
+                await UserManager.AddClaimAsync(Admin, new Claim("ManageDisputes", "true"));
+            }
+            if (!claimList1.Contains("ManageUsers"))
+            {
+                await UserManager.AddClaimAsync(Admin, new Claim("ManageUsers", "true"));
+            }
+            if (!claimList1.Contains("ManageServiceRequested"))
+            {
+                await UserManager.AddClaimAsync(Admin, new Claim("ManageServiceRequested", "true"));
+            }
+            if (!claimList1.Contains("ManageClaims"))
+            {
+                await UserManager.AddClaimAsync(Admin, new Claim("ManageClaims", "true"));
             }
 
             ApplicationUser CustomerService = await UserManager.FindByEmailAsync("CustomerService@gmail.com");
@@ -151,13 +171,9 @@ namespace ECommerce
                 await UserManager.CreateAsync(CustomerService, "P@ssw0rd");
             }
             var claimList2 = (await UserManager.GetClaimsAsync(CustomerService)).Select(p => p.Type);
-            if (!claimList2.Contains("CustomerService"))
+            if (!claimList2.Contains("ManageDisputes"))
             {
-                await UserManager.AddClaimAsync(Admin, new Claim("CustomerService", "true"));
-            }
-            if (!claimList2.Contains("Admin_CustomerService"))
-            {
-                await UserManager.AddClaimAsync(CustomerService, new Claim("Admin_CustomerService", "true"));
+                await UserManager.AddClaimAsync(CustomerService, new Claim("ManageDisputes", "true"));
             }
 
             ApplicationUser Customer = await UserManager.FindByEmailAsync("Customer@gmail.com");

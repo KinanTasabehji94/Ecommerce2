@@ -14,6 +14,14 @@
         <hr />
         <div class="container">
             <div class="row">
+                <div class="col-lg-10">
+                </div>
+                <div class="col-lg-2">
+                    <input class="btn btn-warning btn-block" type="submit" value="قارن" />
+                </div>
+            </div>
+
+            <div class="row">
                 <div class="col-lg-6">
                     <div id="Search">
                         @if (Model.FirstService == null)
@@ -82,6 +90,17 @@
                             </tr>
                         </table>
                     }
+                    @if ((await AuthorizationService.AuthorizeAsync(User, "Customer")).Succeeded)
+                    {
+                        if (@Model.FirstService != null)
+                        {
+                            <div>
+                                <a class="btn btn-success" asp-controller="Orders" asp-action="Create" asp-route-myServiceID="@Model.FirstService.Id">Order</a>
+
+                            </div>
+                        }
+
+                    }
                 </div>
                 <div class="col-lg-6">
                     <div id="Search">
@@ -147,28 +166,39 @@
                             </tr>
                         </table>
                     }
+                    @if ((await AuthorizationService.AuthorizeAsync(User, "Customer")).Succeeded)
+                    {
+                        if (@Model.SecondService != null)
+                        {
+                            <div>
+                                <a class="btn btn-success" asp-controller="Orders" asp-action="Create" asp-route-myServiceID="@Model.SecondService.Id">Order</a>
+
+                            </div>
+                        }
+
+                    }
                 </div>
+
             </div>
-        </div>   
+        </div>
     </div>
-    <input type="submit" value="submit"/>
+
 }
 
 
-    @*<div>
-            @if ((await AuthorizationService.AuthorizeAsync(User, "ServiceProvider")).Succeeded)
-            {
-                <a asp-action="Edit" asp-route-Id="@Model.Id"> Edit</a> <span> | </span>
-                <a asp-action="Index" asp-route-SproviderId="@Model.SproviderId"> عودة</a>
-            }
-            else if ((await AuthorizationService.AuthorizeAsync(User, "Admin_CustomerService")).Succeeded)
-            {
-                <a asp-action="CompanyServices" asp-route-SproviderId="@Model.SproviderId"> عودة</a>
-            }
-            else
-            {
-                <a class="btn btn-success" asp-controller="Orders" asp-action="Create" asp-route-myServiceID="@Model.Id">Order</a>
-                <span> | </span>
-                <a asp-action="CompanyServices" asp-route-SproviderId="@Model.SproviderId"> عودة</a>
-            }
-        </div>*@
+@*<div>
+        @if ((await AuthorizationService.AuthorizeAsync(User, "ServiceProvider")).Succeeded)
+        {
+
+            <a asp-action="Index" asp-route-SproviderId="@Model.SproviderId"> عودة</a>
+        }
+        else if ((await AuthorizationService.AuthorizeAsync(User, "Admin_CustomerService")).Succeeded)
+        {
+            <a asp-action="CompanyServices" asp-route-SproviderId="@Model.SproviderId"> عودة</a>
+        }
+        else
+        {
+
+            <a asp-action="CompanyServices" asp-route-SproviderId="@Model.SproviderId"> عودة</a>
+        }
+    </div>*@

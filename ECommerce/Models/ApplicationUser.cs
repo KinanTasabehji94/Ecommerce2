@@ -25,10 +25,11 @@ namespace Ecommerce.Models
         public string Address { get; set; }
         [Display(Name = "الموقع")]
         public string HomeLocation { get; set; }
-        [Display(Name = "النوع")]
+        [Display(Name = "الجنس")]
         public string Gender { get; set; }
-        [Display(Name = "نوع المتخدم")]
+        [Display(Name = "نوع المستخدم")]
         public string UserType { get; set; }
+        [Display(Name = "تاريخ الانضمام")]
         public DateTime RegisteredDate { get; set; } = DateTime.Now;
         [Display(Name = "الحالة")]
         public string Status { get; set; } = "Active";

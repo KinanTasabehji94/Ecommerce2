@@ -1,0 +1,223 @@
+﻿@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2>تعديل الصلاحيات</h2>
+
+<h4>@ViewBag.User.FullName</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                @{
+                    List<string> s = new List<string>();
+                    foreach (var item in ViewBag.UserClaims)
+                    {
+                        s.Add(item.ClaimType);
+                    }
+
+                    if (s.Contains("ManageCategories"))
+                    {
+                        <div class="form-group">
+                            <label class="container">
+                                <input type="checkbox" name="ManageCategories" value="true" id="ManageCategories" checked />
+                                <input type="hidden" name="ManageCategories" value="false" id="ManageCategoriesHidden" />
+
+                                <span class="checkmark"></span>
+                                إدارة الفئات
+                            </label>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="form-group">
+                            <label class="container">
+                                <input type="checkbox" name="ManageCategories" value="true" id="ManageCategories" />
+                                <input type="hidden" name="ManageCategories" value="false" id="ManageCategoriesHidden" />
+
+                                <span class="checkmark"></span>
+                                إدارة الفئات
+                            </label>
+                        </div>
+                    }
+
+                    <hr />
+
+                    if (s.Contains("ManageSproviders"))
+                    {
+                        <div class="form-group">
+                            <label class="container">
+                                <input type="checkbox" name="ManageSproviders" value="true" id="ManageSproviders" checked />
+                                <input type="hidden" name="ManageSproviders" value="false" id="ManageSprovidersHidden" />
+
+                                <span class="checkmark"></span>
+                                إدارة مقدمي الخدمات
+                            </label>
+                        </div>
+
+                    }
+                    else
+                    {
+                        <div class="form-group">
+                            <label class="container">
+                                <input type="checkbox" name="ManageSproviders" value="true" id="ManageSproviders" />
+                                <input type="hidden" name="ManageSproviders" value="false" id="ManageSprovidersHidden" />
+
+                                <span class="checkmark"></span>
+                                إدارة مقدمي الخدمات
+                            </label>
+                        </div>
+                    }
+
+                    <hr />
+
+                    if (s.Contains("ManageOrders"))
+                    {
+                        <div class="form-group">
+                            <label class="container">
+                                <input type="checkbox" name="ManageOrders" value="true" id="ManageOrders" checked />
+                                <input type="hidden" name="ManageOrders" value="false" id="ManageOrdersHidden" />
+
+                                <span class="checkmark"></span>
+                                إدارة الطلبات
+                            </label>
+                        </div>
+
+                    }
+                    else
+                    {
+                        <div class="form-group">
+                            <label class="container">
+                                <input type="checkbox" name="ManageOrders" value="true" id="ManageOrders" />
+                                <input type="hidden" name="ManageOrders" value="false" id="ManageOrdersHidden" />
+
+                                <span class="checkmark"></span>
+                                إدارة الطلبات
+                            </label>
+                        </div>
+                    }
+
+                    <hr />
+
+                    if (s.Contains("ManageClaims"))
+                    {
+                        <div class="form-group">
+                            <label class="container">
+                                <input type="checkbox" name="ManageClaims" value="true" id="ManageClaims" checked />
+                                <input type="hidden" name="ManageClaims" value="false" id="ManageClaimsHidden" />
+
+                                <span class="checkmark"></span>
+                                إدارة الصلاحيات
+                            </label>
+                        </div>
+
+                    }
+                    else
+                    {
+                        <div class="form-group">
+                            <label class="container">
+                                <input type="checkbox" name="ManageClaims" value="true" id="ManageClaims" />
+                                <input type="hidden" name="ManageClaims" value="false" id="ManageClaimsHidden" />
+
+                                <span class="checkmark"></span>
+                                إدارة الصلاحيات
+                            </label>
+                        </div>
+                    }
+
+                    <hr />
+
+                    if (s.Contains("ManageUsers"))
+                    {
+                        <div class="form-group">
+                            <label class="container">
+                                <input type="checkbox" name="ManageUsers" value="true" id="ManageUsers" checked />
+                                <input type="hidden" name="ManageUsers" value="false" id="ManageUsersHidden" />
+
+                                <span class="checkmark"></span>
+                                إدارة المستخدمين
+                            </label>
+                        </div>
+
+                    }
+                    else
+                    {
+                        <div class="form-group">
+                            <label class="container">
+                                <input type="checkbox" name="ManageUsers" value="true" id="ManageUsers" />
+                                <input type="hidden" name="ManageUsers" value="false" id="ManageUsersHidden" />
+
+                                <span class="checkmark"></span>
+                                إدارة المستخدمين
+
+                            </label>
+                        </div>
+                    }
+
+                    <hr />
+
+                    if (s.Contains("ManageServiceRequested"))
+                    {
+                        <div class="form-group">
+                            <label class="container">
+                                <input type="checkbox" name="ManageServiceRequested" value="true" id="ManageServiceRequested" checked />
+                                <input type="hidden" name="ManageServiceRequested" value="false" id="ManageServiceRequestedHidden" />
+
+                                <span class="checkmark"></span>
+                                إدارة الخدمات المطلوبة
+                            </label>
+                        </div>
+
+                    }
+                    else
+                    {
+                        <div class="form-group">
+                            <label class="container">
+                                <input type="checkbox" name="ManageServiceRequested" value="true" id="ManageServiceRequested" />
+                                <input type="hidden" name="ManageServiceRequested" value="false" id="ManageServiceRequestedHidden" />
+
+                                <span class="checkmark"></span>
+                                إدارة الخدمات المطلوبة
+                            </label>
+                        </div>
+                    }
+
+                    <hr />
+
+                }
+            </div>
+            <div class="form-group">
+                <input asp-route-UserID="@ViewBag.User.Id" type="submit" value="حفظ" class="btn btn-primary" onclick="myFun()" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="IndexCS">عودة للقائمة</a>
+</div>
+
+<script>
+    function myFun() {
+        if (document.getElementById("ManageCategories").checked) {
+            document.getElementById('ManageCategoriesHidden').disabled = true;
+        }
+        if (document.getElementById("ManageUsers").checked) {
+            document.getElementById('ManageUsersHidden').disabled = true;
+        }
+        if (document.getElementById("ManageOrders").checked) {
+            document.getElementById('ManageOrdersHidden').disabled = true;
+        }
+        if (document.getElementById("ManageSproviders").checked) {
+            document.getElementById('ManageSprovidersHidden').disabled = true;
+        }
+        if (document.getElementById("ManageServiceRequested").checked) {
+            document.getElementById('ManageServiceRequestedHidden').disabled = true;
+        }
+        if (document.getElementById("ManageClaims").checked) {
+            document.getElementById('ManageClaimsHidden').disabled = true;
+        }
+    }
+</script>

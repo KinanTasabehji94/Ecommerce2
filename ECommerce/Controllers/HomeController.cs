@@ -41,21 +41,22 @@ namespace ECommerce.Controllers
             var categories = categoryRepository.List();
             return View(categories);
         }
+
         public IActionResult Chat()
         {
             return View();
         }
 
-        public IActionResult CustomerServers()
+        [Authorize(Policy = "ManageClaims")]
+        public IActionResult IndexCS()
         {
             var Users = userRepository.CustomerServiceList();
             return View(Users);
         }
 
-
         // GET: Categories/Edit/5
-       // [Authorize(Policy = "Admin")]
-        public ActionResult Edit(string UserId)
+        [Authorize(Policy = "ManageClaims")]
+        public ActionResult EditClaims(string UserId)
         {
             ViewBag.User = userRepository.GetUserDetails(UserId);
             ViewBag.UserClaims = userClaimsRepository.List().Where(d => d.UserId == UserId);
@@ -66,8 +67,8 @@ namespace ECommerce.Controllers
         // POST: Categories/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        //[Authorize(Policy = "Admin")]
-        public async Task<ActionResult> Edit(bool Admin, bool CustomerService, bool Customer, bool ServiceProvider, bool Admin_CustomerService, string UserID)
+        [Authorize(Policy = "ManageClaims")]
+        public async Task<ActionResult> EditClaims(bool ManageCategories, bool ManageUsers, bool ManageOrders, bool ManageSproviders, bool ManageServiceRequested, bool ManageClaims, string UserID)
         {
             var UserManager = serviceProvider.GetRequiredService<Microsoft.AspNetCore.Identity.UserManager<ApplicationUser>>();
 
@@ -78,34 +79,40 @@ namespace ECommerce.Controllers
                 await UserManager.RemoveClaimAsync(user, new Claim(item.ClaimType, "true"));
             }
 
-            if (Admin==true)
+            await UserManager.AddClaimAsync(user, new Claim("ManageDisputes", "true"));
+
+            if (ManageCategories == true)
             {
-                await UserManager.AddClaimAsync(user, new Claim("Admin", "true"));
+                await UserManager.AddClaimAsync(user, new Claim("ManageCategories", "true"));
             }
 
-            if (CustomerService == true)
+            if (ManageUsers == true)
             {
-                await UserManager.AddClaimAsync(user, new Claim("CustomerService", "true"));
+                await UserManager.AddClaimAsync(user, new Claim("ManageUsers", "true"));
             }
 
-            if (Customer == true)
+            if (ManageOrders == true)
             {
-                await UserManager.AddClaimAsync(user, new Claim("Customer", "true"));
+                await UserManager.AddClaimAsync(user, new Claim("ManageOrders", "true"));
             }
 
-            if (ServiceProvider == true)
+            if (ManageSproviders == true)
             {
-                await UserManager.AddClaimAsync(user, new Claim("ServiceProvider", "true"));
+                await UserManager.AddClaimAsync(user, new Claim("ManageSproviders", "true"));
             }
 
-            if (Admin_CustomerService == true)
+            if (ManageServiceRequested == true)
             {
-                await UserManager.AddClaimAsync(user, new Claim("Admin_CustomerService", "true"));
+                await UserManager.AddClaimAsync(user, new Claim("ManageServiceRequested", "true"));
             }
 
-            return RedirectToAction(nameof(CustomerServers));
+            if (ManageClaims == true)
+            {
+                await UserManager.AddClaimAsync(user, new Claim("ManageClaims", "true"));
+            }
+
+            return RedirectToAction(nameof(IndexCS));
         }
-
 
         public ActionResult Search()
         {
@@ -121,8 +128,6 @@ namespace ECommerce.Controllers
             }
             var result = serviceRepository.List().Where(a => a.Name.Contains(searchName)).OrderBy(a=>a.Sprovider.CompanyName);
             return View(result);
-        }
-
-   
+        }   
     }
 }

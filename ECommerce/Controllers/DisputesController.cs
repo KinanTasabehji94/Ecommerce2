@@ -24,25 +24,25 @@ namespace ECommerce.Controllers
             this.disputeRepository = disputeRepository;
             this._userManager = _userManager;
         }
-        [Authorize(Policy = "Admin_CustomerService")]
 
         // GET: Disputes
+        [Authorize(Policy = "ManageDisputes")]
         public ActionResult Index()
         {
             var disputes = disputeRepository.List();
             return View(disputes);
         }
-        [Authorize(Policy = "Customer")]
 
         // GET: DisputesByCostomer
+        [Authorize(Policy = "Customer")]
         public ActionResult CustomerDisputes(string customerId)
         {
             var disputes = disputeRepository.List().Where(x=>x.Order.CustomerId == customerId);
             return View(disputes);
         }
-        [Authorize(Policy = "ServiceProvider")]
 
         // GET: DisputesByCompany
+        [Authorize(Policy = "ServiceProvider")]
         public ActionResult CompanyDisputes(string SproviderId)
         {
             var disputes = disputeRepository.List().Where(x=>x.Order.Service.Sprovider.User.Id == SproviderId);
@@ -56,20 +56,20 @@ namespace ECommerce.Controllers
 
             return View(dispute);
         }
-        [Authorize(Policy = "Customer")]
 
         // GET: Disputes/Create
+        [Authorize(Policy = "Customer")]
         public ActionResult Create(int orderId, string customerId)
         {
             ViewBag.CustomerId = customerId;
             TempData["OrderId"] = orderId;
             return View();
         }
-        [Authorize(Policy = "Customer")]
 
         // POST: Disputes/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Policy = "Customer")]
         public ActionResult Create(Dispute dispute)
         {
             dispute.OrderId = Int32.Parse(TempData["OrderId"].ToString());
@@ -84,6 +84,7 @@ namespace ECommerce.Controllers
             return View();
         }
 
+        [Authorize(Policy = "ManageDisputes")]
         public ActionResult TakeDispute(int id, string arbiterId)
         {
             var dispute = disputeRepository.Find(id);
@@ -94,9 +95,8 @@ namespace ECommerce.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        [Authorize(Policy = "Admin_CustomerService")]
-
         // GET: Disputes/Edit/5
+        [Authorize(Policy = "ManageDisputes")]
         public ActionResult Edit(int id)
         {
             var dispute = disputeRepository.Find(id);
@@ -104,12 +104,9 @@ namespace ECommerce.Controllers
         }
 
         // POST: Disputes/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [Authorize(Policy = "Admin_CustomerService")]
-
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Policy = "ManageDisputes")]
         public ActionResult Edit(int id, [Bind("Id,OrderId,OpenedDate,ArbiterId,Result,Status")] Dispute dispute)
         {
             if (ModelState.IsValid)
@@ -150,6 +147,5 @@ namespace ECommerce.Controllers
             disputeRepository.Delete(id);
             return RedirectToAction(nameof(CustomerDisputes), new { customerId = _userManager.GetUserId(HttpContext.User) });
         }
-
     }
 }

@@ -53,7 +53,7 @@ th {
 }
 
 #SearchName {
-    width: 150px;
+    width: 140px;
     border: 2px;
     border-radius: 8px;
     transition: width 0.01s ease-in-out;
@@ -61,5 +61,6 @@ th {
 
     #SearchName:focus {
         width: 90%;
-        border: none;
+        outline: none;
     }
+

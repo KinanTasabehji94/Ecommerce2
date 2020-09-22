@@ -50,6 +50,12 @@ namespace ECommerce.Repositories
             return user;
         }
 
+        public AspNetUsers GetUserByEmail(string Email)
+        {
+            var user = List().Where(x => x.Email == Email).FirstOrDefault();
+            return user;
+        }
+
         public AspNetUsers GetUserDetails(string id)
         {
             var user =  db.AspNetUsers.Find(id);
@@ -60,9 +66,10 @@ namespace ECommerce.Repositories
         {
             return db.AspNetUsers.Include(d=>d.AspNetUserClaims).ToList();
         }
+
         public IList<AspNetUserClaims> CustomerServiceList()
         {
-            return db.AspNetUserClaims.Include(d => d.User).Where(d=>d.ClaimType== "Admin_CustomerService").ToList();
+            return db.AspNetUserClaims.Include(d => d.User).Where(d=>d.ClaimType== "ManageDisputes").ToList();
         }
 
         public void Update(string id, AspNetUsers entity)

@@ -16,5 +16,6 @@ namespace ECommerce.Repositories.Interfaces
         Task<ApplicationUser> Find(string id);
         IList<AspNetUserClaims> CustomerServiceList();
         AspNetUsers GetUserDetails(string id);
+        AspNetUsers GetUserByEmail(string Email);
     }
 }

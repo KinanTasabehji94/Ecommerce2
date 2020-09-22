@@ -98,6 +98,9 @@ namespace Ecommerce.Areas.Identity.Pages.Account
             [Display(Name = "Home Location")]
             public string HomeLocation { get; set; }
 
+            [Display(Name = "رابط العنوان")]
+            public string MapLocation { get; set; }
+
             [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
             [DataType(DataType.Date)]
             [Display(Name = "Birth Date")]
@@ -202,7 +205,8 @@ namespace Ecommerce.Areas.Identity.Pages.Account
                         Rating = 0,
                         Image = UrlImage,
                         CompanyName = Input.CompanyName,
-                        CategoryId= Input.CategoryId
+                        CategoryId= Input.CategoryId,
+                        MapLocation=Input.MapLocation
 
                     };
                     _Sprovider.Add(Sprovider);

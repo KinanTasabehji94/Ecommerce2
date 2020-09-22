@@ -104,6 +104,7 @@ namespace ECommerce.Controllers
                 }
                 newSprovider.CompanyName = sprovider.CompanyName;
                 newSprovider.CategoryId = sprovider.CategoryId;
+                newSprovider.MapLocation = sprovider.MapLocation;
 
                 sproviderRepository.Update(id, newSprovider);
 

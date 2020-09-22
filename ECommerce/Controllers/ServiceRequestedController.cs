@@ -51,7 +51,8 @@ namespace ECommerce.Controllers
             {
                 serviceRequestedRepository.Add(service);
 
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", "Home");
+
             }
             return View();
         }

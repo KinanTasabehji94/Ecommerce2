@@ -4,30 +4,39 @@
     ViewData["Title"] = "Delete";
 }
 
-<h2>Delete</h2>
+<br />
 
-<h3>Are you sure you want to delete this?</h3>
+<h3>هل حقاً ترغب في حذف الخدمة</h3>
 <div>
-    <h4>ServiceRequested</h4>
+
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Describtion)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Describtion)
-        </dd>
-    </dl>
-    
+    <table class="table table-bordered table-striped table-responsive">
+
+        <thead>
+            <tr>
+                <th>
+                    اسم الخدمة
+                </th>
+                <th>
+                    وصف الخدمة
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    @Model.Name
+                </td>
+                <td>
+                    @Model.Describtion
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
     <form asp-action="Delete">
         <input type="hidden" asp-for="Id" />
-        <input type="submit" value="Delete" class="btn btn-default" /> |
-        <a asp-action="Index">Back to List</a>
+        <input type="submit" value="حذف" class="btn btn-danger" /> |
+        <a asp-action="Index">عودة للقائمة</a>
     </form>
 </div>

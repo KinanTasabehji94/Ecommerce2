@@ -1,13 +1,16 @@
 ﻿
 <div class="container" style="padding-top:80px;">
     <div class="row">
-        <div class="col-md-5">
-            <h4>ادخل اسمك هنا:</h4>
-            <input type="text" id="txtUser" class="form-control" /><br />
-            <h4>اكتب رسالتك:</h4>
-            <textarea rows="10" cols="50" id="txtMessage" class="form-control"></textarea><br />
-            <button type="submit" id="btnSend" class="btn btn-info">إرسال</button>
-        </div>
+        
+            <div class="col-md-5">
+                <h4>ادخل اسمك هنا:</h4>
+                <input type="text" id="txtUser" class="form-control" /><br />
+                <h4>اكتب رسالتك:</h4>
+                <textarea rows="10" cols="50" id="txtMessage" class="form-control"></textarea><br />
+                <button type="submit" id="btnSend"  class="btn btn-info" @*onclick="MyFunction()"*@>إرسال</button>
+            </div>
+        
+
         <div class="col-md-1">
         </div>
         <div class="col-md-6">
@@ -19,3 +22,8 @@
 <script src="~/lib/jquery/dist/jquery.js"></script>
 <script src="~/lib/signalr/dist/browser/signalr.js"></script>
 <script src="~/js/site.js"></script>
+@*<script>
+    function MyFunction() {
+        document.getElementById("txtMessage").value = "";
+    }
+</script>*@

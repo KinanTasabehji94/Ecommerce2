@@ -27,6 +27,8 @@ namespace ECommerce.Models
         public virtual DbSet<Order> Order { get; set; }
         public virtual DbSet<Service> Service { get; set; }
         public virtual DbSet<Sprovider> Sprovider { get; set; }
+        public virtual DbSet<ServiceRequested> ServiceRequested { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

@@ -22,7 +22,9 @@
                     {
                         <div class="form-group">
                             <label class="container">
-                                <input name="Admin" type="checkbox" value="true" id="Admin" checked/>
+                                <input type="checkbox" name="Admin" value="true" id="Admin" checked />
+                                <input type="hidden" name="Admin" value="false" id="AdminHidden" />
+
                                 <span class="checkmark"></span>
                                 Admin
                             </label>
@@ -33,7 +35,9 @@
                     {
                         <div class="form-group">
                             <label class="container">
-                                <input name="Admin" type="checkbox" value="true" id="Admin">
+                                <input type="checkbox" name="Admin" value="true" id="Admin" />
+                                <input type="hidden" name="Admin" value="false" id="AdminHidden" />
+
                                 <span class="checkmark"></span>
                                 Admin
                             </label>
@@ -44,7 +48,9 @@
                     {
                         <div class="form-group">
                             <label class="container">
-                                <input name="CustomerService" type="checkbox" id="CustomerService" checked>
+                                <input type="checkbox" name="CustomerService" value="true" id="CustomerService" checked />
+                                <input type="hidden" name="CustomerService" value="false" id="CustomerServiceHidden" />
+
                                 <span class="checkmark"></span>
                                 CustomerService
                             </label>
@@ -55,7 +61,9 @@
                     {
                         <div class="form-group">
                             <label class="container">
-                                <input name="CustomerService" type="checkbox" id="CustomerService">
+                                <input type="checkbox" name="CustomerService" value="true" id="CustomerService" />
+                                <input type="hidden" name="CustomerService" value="false" id="CustomerServiceHidden" />
+
                                 <span class="checkmark"></span>
                                 CustomerService
                             </label>
@@ -66,7 +74,9 @@
                     {
                         <div class="form-group">
                             <label class="container">
-                                <input name="Customer" type="checkbox" value="true" id="Customer" checked>
+                                <input type="checkbox" name="Customer" value="true" id="Customer" checked />
+                                <input type="hidden" name="Customer" value="false" id="CustomerHidden" />
+
                                 <span class="checkmark"></span>
                                 Customer
                             </label>
@@ -77,7 +87,9 @@
                     {
                         <div class="form-group">
                             <label class="container">
-                                <input name="Customer" type="checkbox" value="true" id="Customer">
+                                <input type="checkbox" name="Customer" value="true" id="Customer" />
+                                <input type="hidden" name="Customer" value="false" id="CustomerHidden" />
+
                                 <span class="checkmark"></span>
                                 Customer
                             </label>
@@ -88,7 +100,9 @@
                     {
                         <div class="form-group">
                             <label class="container">
-                                <input name="ServiceProvider" type="checkbox" value="true" id="ServiceProvider" checked>
+                                <input type="checkbox" name="ServiceProvider" value="true" id="ServiceProvider" checked />
+                                <input type="hidden" name="ServiceProvider" value="false" id="ServiceProviderHidden" />
+
                                 <span class="checkmark"></span>
                                 ServiceProvider
                             </label>
@@ -99,7 +113,9 @@
                     {
                         <div class="form-group">
                             <label class="container">
-                                <input name="ServiceProvider" type="checkbox" value="true" id="ServiceProvider">
+                                <input type="checkbox" name="ServiceProvider" value="true" id="ServiceProvider" />
+                                <input type="hidden" name="ServiceProvider" value="false" id="ServiceProviderHidden" />
+
                                 <span class="checkmark"></span>
                                 ServiceProvider
                             </label>
@@ -110,7 +126,8 @@
                     {
                         <div class="form-group">
                             <label class="container">
-                                <input name="Admin_CustomerService" type="checkbox" value="true" id="Admin_CustomerService" checked>
+                                <input type="checkbox" name="Admin_CustomerService" value="true" id="Admin_CustomerService" checked />
+                                <input type="hidden" name="Admin_CustomerService" value="false" id="Admin_CustomerServiceHidden" />
                                 <span class="checkmark"></span>
                                 Admin_CustomerService
                             </label>
@@ -121,22 +138,18 @@
                     {
                         <div class="form-group">
                             <label class="container">
-                                <input name="Admin_CustomerService" type="checkbox" value="true" id="Admin_CustomerService">
-                                <span class="checkmark"></span>
+                                <input type="checkbox" name="Admin_CustomerService" value="true" id="Admin_CustomerService" />
+                                <input type="hidden" name="Admin_CustomerService" value="false" id="Admin_CustomerServiceHidden" />                                <span class="checkmark"></span>
                                 Admin_CustomerService
                             </label>
                         </div>
                     }
-
                 }
-
-
             </div>
-
-                            <div class="form-group">
-                                <input asp-route-UserID="@ViewBag.User.Id" type="submit" value="Save" class="btn btn-default" />
-                            </div>
-</form>
+            <div class="form-group">
+                <input asp-route-UserID="@ViewBag.User.Id" type="submit" value="Save" class="btn btn-default" onclick="myFun()" />
+            </div>
+        </form>
     </div>
 </div>
 
@@ -144,3 +157,22 @@
     <a asp-action="Index">Back to List</a>
 </div>
 
+<script>
+    function myFun() {
+        if (document.getElementById("Admin").checked) {
+            document.getElementById('AdminHidden').disabled = true;
+        }
+        if (document.getElementById("CustomerService").checked) {
+            document.getElementById('CustomerServiceHidden').disabled = true;
+        }
+        if (document.getElementById("Customer").checked) {
+            document.getElementById('CustomerHidden').disabled = true;
+        }
+        if (document.getElementById("ServiceProvider").checked) {
+            document.getElementById('ServiceProviderHidden').disabled = true;
+        }
+        if (document.getElementById("Admin_CustomerService").checked) {
+            document.getElementById('Admin_CustomerServiceHidden').disabled = true;
+        }
+    }
+</script>

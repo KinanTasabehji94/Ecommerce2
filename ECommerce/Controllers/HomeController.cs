@@ -67,51 +67,42 @@ namespace ECommerce.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         //[Authorize(Policy = "Admin")]
-        public async Task<ActionResult> Edit(bool Admin, bool CustomerService, bool Customer, bool ServiceProvider, bool Admin_Service , string UserID)
+        public async Task<ActionResult> Edit(bool Admin, bool CustomerService, bool Customer, bool ServiceProvider, bool Admin_CustomerService, string UserID)
         {
             var UserManager = serviceProvider.GetRequiredService<Microsoft.AspNetCore.Identity.UserManager<ApplicationUser>>();
 
             var user = await userRepository.Find(UserID);
+            var oldClaims = userClaimsRepository.List().Where(x => x.UserId == UserID);
+            foreach (var item in oldClaims)
+            {
+                await UserManager.RemoveClaimAsync(user, new Claim(item.ClaimType, "true"));
+            }
+
             if (Admin==true)
             {
                 await UserManager.AddClaimAsync(user, new Claim("Admin", "true"));
             }
-            else
-            {
-                await UserManager.RemoveClaimAsync(user, new Claim("Admin", "true"));
-            }
+
             if (CustomerService == true)
             {
                 await UserManager.AddClaimAsync(user, new Claim("CustomerService", "true"));
             }
-            else
-            {
-                await UserManager.RemoveClaimAsync(user, new Claim("CustomerService", "true"));
-            }
+
             if (Customer == true)
             {
                 await UserManager.AddClaimAsync(user, new Claim("Customer", "true"));
             }
-            else
-            {
-                await UserManager.RemoveClaimAsync(user, new Claim("Customer", "true"));
-            }
+
             if (ServiceProvider == true)
             {
                 await UserManager.AddClaimAsync(user, new Claim("ServiceProvider", "true"));
             }
-            else
-            {
-                await UserManager.RemoveClaimAsync(user, new Claim("ServiceProvider", "true"));
-            }
-            if (Admin_Service == true)
+
+            if (Admin_CustomerService == true)
             {
                 await UserManager.AddClaimAsync(user, new Claim("Admin_CustomerService", "true"));
             }
-            else
-            {
-                await UserManager.RemoveClaimAsync(user, new Claim("Admin_CustomerService", "true"));
-            }
+
             return RedirectToAction(nameof(CustomerServers));
         }
 

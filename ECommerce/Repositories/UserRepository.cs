@@ -62,7 +62,7 @@ namespace ECommerce.Repositories
         }
         public IList<AspNetUserClaims> CustomerServiceList()
         {
-            return db.AspNetUserClaims.Include(d => d.User).Where(d=>d.ClaimType== "CustomerService").ToList();
+            return db.AspNetUserClaims.Include(d => d.User).Where(d=>d.ClaimType== "Admin_CustomerService").ToList();
         }
 
         public void Update(string id, AspNetUsers entity)

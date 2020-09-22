@@ -17,6 +17,7 @@ namespace ECommerce.Models
         public string Name { get; set; }
         [Display(Name="وصف الفئة")]
         public string Description { get; set; }
+        [Display(Name = "صورة")]
         public string Image { get; set; }
 
         public ICollection<Sprovider> Sprovider { get; set; }

@@ -4,7 +4,6 @@
     ViewData["Title"] = "ServiceProviderOrders";
 }
 <style>
- 
 </style>
 <h2>طلبيات واردة</h2>
 <br />
@@ -37,61 +36,60 @@
     <tbody>
         @foreach (var item in Model)
         {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Customer.FullName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.OrderDate)
-            </td>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Customer.FullName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OrderDate)
+                </td>
 
-            <td>
-                @Html.DisplayFor(modelItem => item.OrderNotes)
-            </td>
-            <td>
-                <div style="margin: auto; width:50%;">
-                    @*<span>Rate: </span>*@
-                    @{
-                        var counter = 0;
-                        for (int i = 0; i < item.Rating; i += 20)
-                        {
-                            counter++;
-                            <i class="fa fa-star" style="color:goldenrod; align-content:center"></i>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OrderNotes)
+                </td>
+                <td>
+                    <div style="margin: auto; width:50%;">
+                        @*<span>Rate: </span>*@
+                        @{
+                            var counter = 0;
+                            for (int i = 0; i < item.Rating; i += 20)
+                            {
+                                counter++;
+                                <i class="fa fa-star" style="color:goldenrod; align-content:center"></i>
+                            }
+                            for (int i = 0; i < 5 - counter; i++)
+                            {
+                                <i class="fa fa-star"></i>
+                            }
                         }
-                        for (int i = 0; i < 5 - counter; i++)
-                        {
-                            <i class="fa fa-star"></i>
-                        }
+                    </div>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RatingNotes)
+                </td>
+
+                <td>
+                    @if (item.OrderStatus == "انتظار")
+                    {
+                        <p class="btn btn-primary disabled">انتظار</p>
                     }
-                </div>
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RatingNotes)
-            </td>
-
-            <td>
-                @if (item.OrderStatus == "Opened")
-                {
-                    <p class="btn btn-primary disabled">@item.OrderStatus</p>
-                }
-                else if (item.OrderStatus == "Closed")
-                {
-                    <p class="btn btn-success disabled">@item.OrderStatus</p>
-                }
-                else if (item.OrderStatus == "Rejected")
-                {
-                    <p class="btn btn-danger disabled">@item.OrderStatus</p>
-                }
-            </td>
-            <td>
-                @if (item.OrderStatus != "Closed")
-                {
-                    <a asp-action="Edit" asp-route-id="@item.Id">Eتعديل</a><span> | </span>
-                }
-
-                <a asp-action="Details" asp-route-id="@item.Id">تفاصيل</a>
-            </td>
-        </tr>
+                    else if (item.OrderStatus == "منهي")
+                    {
+                        <p class="btn btn-success disabled">منهي</p>
+                    }
+                    else if (item.OrderStatus == "مرفوض")
+                    {
+                        <p class="btn btn-danger disabled">مرفوض</p>
+                    }
+                </td>
+                <td>
+                    @if (item.OrderStatus != "Closed")
+                    {
+                        <a asp-action="Edit" asp-route-id="@item.Id">تعديل</a><span> | </span>
+                    }
+                    <a asp-action="Details" asp-route-id="@item.Id">تفاصيل</a>
+                </td>
+            </tr>
         }
     </tbody>
 </table>

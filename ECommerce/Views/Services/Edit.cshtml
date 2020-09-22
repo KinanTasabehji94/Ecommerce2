@@ -43,14 +43,15 @@
                 </div>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="حفظ" class="btn btn-primary" /> <span> | </span>
+                <a asp-action="Index" asp-route-SproviderId="@Model.SproviderId">عودة</a>
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index"asp-route-SproviderId ="@Model.SproviderId">عودة</a>
+    
 </div>
 
 @section Scripts {

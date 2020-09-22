@@ -57,17 +57,17 @@
                     @Html.DisplayFor(modelItem => item.Result)
                 </td>
                 <td>
-                    @if (item.Status == "Opened")
+                    @if (item.Status == "انتظار")
                     {
-                        <p class="btn btn-primary disabled">@item.Status</p>
+                        <p class="btn btn-primary disabled">انتظار</p>
                     }
-                    else if (item.Status == "Closed")
+                    else if (item.Status == "منهي")
                     {
-                        <p class="btn btn-success disabled">@item.Status</p>
+                        <p class="btn btn-success disabled">منهي</p>
                     }
-                    else if (item.Status == "OnProgress")
+                    else if (item.Status == "جاري العمل")
                     {
-                        <p class="btn btn-warning disabled">@item.Status</p>
+                        <p class="btn btn-warning disabled">جاري العمل</p>
                     }
                 </td>
                 <td>

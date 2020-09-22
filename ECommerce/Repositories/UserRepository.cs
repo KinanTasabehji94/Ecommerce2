@@ -13,7 +13,7 @@ namespace ECommerce.Repositories
 {
     public class UserRepository : IUser
     {
-        myDbContext db;
+        private readonly myDbContext db;
         private readonly IUserClaims userClaimsRepository;
         private readonly UserManager<ApplicationUser> _userManager;
 
@@ -52,7 +52,7 @@ namespace ECommerce.Repositories
 
         public AspNetUsers GetUserByEmail(string Email)
         {
-            var user = List().Where(x => x.Email == Email).FirstOrDefault();
+            var user = List().Where(x => x.NormalizedEmail == Email).FirstOrDefault();
             return user;
         }
 

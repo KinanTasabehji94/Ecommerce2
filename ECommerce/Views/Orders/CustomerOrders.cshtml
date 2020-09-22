@@ -61,25 +61,20 @@
                 <td>
                     @if (item.OrderStatus == "Opened")
                     {
-                        <p class="btn btn-primary disabled">@item.OrderStatus</p>
+                        <p class="btn btn-primary disabled">انتظار</p>
                     }
                     else if (item.OrderStatus == "Closed")
                     {
-                        <p class="btn btn-success disabled">@item.OrderStatus</p>
+                        <p class="btn btn-success disabled">انتهى</p>
                     }
                     else if (item.OrderStatus == "Rejected")
                     {
-                        <p class="btn btn-danger disabled">@item.OrderStatus</p>
+                        <p class="btn btn-danger disabled">مرفوض</p>
                     }
                 </td>
                 <td>
                     <a asp-action="Rate" asp-route-id="@item.Id">تقييم</a> |
-                    <a asp-action="Create" asp-controller="Disputes" asp-route-orderId="@item.Id" asp-route-CustomerId="@item.CustomerId">Open Complaint</a> |
-                    @if (item.OrderStatus=="Opened")
-                    {
-                        <a asp-action="Edit" asp-route-id="@item.Id">تعديل</a><span> | </span>
-                    }
-                  
+                    <a asp-action="Create" asp-controller="Disputes" asp-route-orderId="@item.Id" asp-route-CustomerId="@item.CustomerId">شكوى</a> |
                     <a asp-action="Details" asp-route-id="@item.Id">تفاصيل</a> |
                     <a asp-action="Delete" asp-route-id="@item.Id">حذف</a>
                 </td>

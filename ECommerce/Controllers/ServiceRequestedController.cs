@@ -76,7 +76,7 @@ namespace ECommerce.Controllers
                 ServiceRequested newServiceRequested = serviceRequestedRepository.Find(id);
 
                 newServiceRequested.Name = service.Name;
-                newServiceRequested.Describtion = service.Describtion;
+                newServiceRequested.Description = service.Description;
 
                 serviceRequestedRepository.Update(newServiceRequested);
 

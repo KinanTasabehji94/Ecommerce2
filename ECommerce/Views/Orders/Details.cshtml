@@ -23,7 +23,7 @@
     <thead>
         <tr>
             <th>
-               رقم الطلبية
+                رقم الطلبية
             </th>
             <th>
                 تاريخ
@@ -71,7 +71,7 @@
         <thead>
             <tr>
                 <th>
-                   الاسم
+                    الاسم
                 </th>
                 <th>
                     رقم الهاتف
@@ -112,14 +112,14 @@
     <thead>
         <tr>
             <th colspan="4">
-               بائع الخدمة
+                بائع الخدمة
             </th>
         </tr>
     </thead>
     <thead>
         <tr>
             <th>
-               الفئة
+                الفئة
             </th>
             <th>
                 الاسم
@@ -258,11 +258,11 @@
 
 @if ((await AuthorizationService.AuthorizeAsync(User, "Customer")).Succeeded)
 {
-    <a asp-controller="Orders" asp-action="CustomerOrders" asp-route-customerId="@UserManager.GetUserId(User)">Back to List</a>
+    <a asp-controller="Orders" asp-action="CustomerOrders" asp-route-customerId="@UserManager.GetUserId(User)">عودة للقائمة</a>
 }
 else if ((await AuthorizationService.AuthorizeAsync(User, "ServiceProvider")).Succeeded)
 {
-    <a asp-controller="Orders" asp-action="ServiceProviderOrders" asp-route-SproviderId="@UserManager.GetUserId(User)">Back to List</a>
+    <a asp-controller="Orders" asp-action="ServiceProviderOrders" asp-route-SproviderId="@UserManager.GetUserId(User)">عودة للقائمة</a>
 }
 else if ((await AuthorizationService.AuthorizeAsync(User, "ManageOrders")).Succeeded)
 {

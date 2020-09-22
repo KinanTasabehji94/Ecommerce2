@@ -59,15 +59,15 @@
                                 }
                                 @if ((await AuthorizationService.AuthorizeAsync(User, "ManageOrders")).Succeeded)
                                 {
-                                    <li><a asp-area="" asp-controller="Orders" asp-action="Index">إدارة طلبيات </a></li>
+                                    <li><a asp-area="" asp-controller="Orders" asp-action="Index">إدارة الطلبات </a></li>
                                 }
                                 @if ((await AuthorizationService.AuthorizeAsync(User, "ManageDisputes")).Succeeded)
                                 {
-                                    <li><a asp-area="" asp-controller="Disputes" asp-action="Index">إدارة منازعات</a></li>
+                                    <li><a asp-area="" asp-controller="Disputes" asp-action="Index">إدارة المنازعات</a></li>
                                 }
                                 @if ((await AuthorizationService.AuthorizeAsync(User, "ManageClaims")).Succeeded)
                                 {
-                                    <li><a asp-area="" asp-controller="Home" asp-action="IndexCS">إدارة الصلاحيات</a></li>
+                                    <li><a asp-area="" asp-controller="Claims" asp-action="Index">إدارة الصلاحيات</a></li>
                                 }
                                 @if ((await AuthorizationService.AuthorizeAsync(User, "ManageUsers")).Succeeded)
                                 {
@@ -84,15 +84,16 @@
                     @if ((await AuthorizationService.AuthorizeAsync(User, "Customer")).Succeeded)
                     {
                         <li><a href="/#Categories">فئات الخدمات</a></li>
-                        <li><a asp-area="" asp-controller="Orders" asp-action="CustomerOrders" asp-route-customerId="@UserManager.GetUserId(User)">طلبيات</a></li>
-                        <li><a asp-area="" asp-controller="Disputes" asp-action="CustomerDisputes" asp-route-customerId="@UserManager.GetUserId(User)">منازعات</a></li>
+                        <li><a asp-area="" asp-controller="Orders" asp-action="CustomerOrders" asp-route-customerId="@UserManager.GetUserId(User)">الطلبات</a></li>
+                        <li><a asp-area="" asp-controller="Disputes" asp-action="CustomerDisputes" asp-route-customerId="@UserManager.GetUserId(User)">المنازعات</a></li>
+                        <li><a asp-area="" asp-controller="ServiceRequested" asp-action="Create" asp-route-customerId="@UserManager.GetUserId(User)">طلب خدمة غير موجودة</a></li>
                     }
                     @if ((await AuthorizationService.AuthorizeAsync(User, "ServiceProvider")).Succeeded)
                     {
                         var SproviderId = SproviderRepository.List().Where(x => x.UserId == UserManager.GetUserId(User)).FirstOrDefault().Id;
 
                         <li><a asp-area="" asp-controller="Services" asp-action="Index" asp-route-SproviderId="@SproviderId">الخدمات</a></li>
-                        <li><a asp-area="" asp-controller="Orders" asp-action="ServiceProviderOrders" asp-route-SproviderId="@UserManager.GetUserId(User)">الطلبيات</a></li>
+                        <li><a asp-area="" asp-controller="Orders" asp-action="ServiceProviderOrders" asp-route-SproviderId="@UserManager.GetUserId(User)">الطلبات</a></li>
                         <li><a asp-area="" asp-controller="Disputes" asp-action="CompanyDisputes" asp-route-SproviderId="@UserManager.GetUserId(User)">المنازعات</a></li>
                     }
 

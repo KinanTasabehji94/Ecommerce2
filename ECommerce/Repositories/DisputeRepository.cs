@@ -10,7 +10,7 @@ namespace ECommerce.Repositories
 {
     public class DisputeRepository : IDispute
     {
-        myDbContext db;
+        private readonly myDbContext db;
 
         public DisputeRepository(myDbContext _db)
         {

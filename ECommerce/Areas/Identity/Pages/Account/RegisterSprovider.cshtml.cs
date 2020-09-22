@@ -63,39 +63,39 @@ namespace Ecommerce.Areas.Identity.Pages.Account
         public class InputModel
         {
             [Required]
-            [Display(Name = "Company Category")]
+            [Display(Name = "فئة مزود الخدمة")]
             public int CategoryId { get; set; }
             [Required]
-            [Display(Name = "Company Name")]
+            [Display(Name = "اسم مزود الخدمة")]
             public string CompanyName { get; set; }
 
             [Required]
-            [Display(Name = "First Name")]
+            [Display(Name = "الاسم الأول")]
             public string FirstName { get; set; }
 
             [Required]
-            [Display(Name = "Last Name")]
+            [Display(Name = "الاسم الاخير")]
             public string LastName { get; set; }
 
             [Required]
-            [Display(Name = "Phone Number")]
+            [Display(Name = "رقم الهاتف")]
             public string PhoneNumber { get; set; }
 
             [Required]
             [EmailAddress]
-            [Display(Name = "Email")]
+            [Display(Name = "البريد الالكتروني")]
             public string Email { get; set; }
 
-            [Display(Name = "National Id")]
+            [Display(Name = "الرقم الوطني")]
             public string NationalId { get; set; }
 
-            [Display(Name = "City")]
+            [Display(Name = "المدينة")]
             public string City { get; set; }
 
-            [Display(Name = "Address")]
+            [Display(Name = "العنوان")]
             public string Address { get; set; }
 
-            [Display(Name = "Home Location")]
+            [Display(Name = "الموقع")]
             public string HomeLocation { get; set; }
 
             [Display(Name = "رابط العنوان")]
@@ -103,24 +103,24 @@ namespace Ecommerce.Areas.Identity.Pages.Account
 
             [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
             [DataType(DataType.Date)]
-            [Display(Name = "Birth Date")]
+            [Display(Name = "تاريخ التولد")]
             public string BirthDate { get; set; }
 
-            [Display(Name = "Gender")]
+            [Display(Name = "الجنس")]
             public string Gender { get; set; }
 
-            [Display(Name = "Image")]
+            [Display(Name = "شعار مزود الخدمة")]
             public IFormFile Image { get; set; }
 
             [Required]
-            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+            [StringLength(100, ErrorMessage = "طول كلمة المرور غير كافي، (6) احرف على الاقل", MinimumLength = 6)]
             [DataType(DataType.Password)]
-            [Display(Name = "Password")]
+            [Display(Name = "كلمة المرور")]
             public string Password { get; set; }
 
             [DataType(DataType.Password)]
-            [Display(Name = "Confirm password")]
-            [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+            [Display(Name = "تاكيد كلمة المرور")]
+            [Compare("Password", ErrorMessage = "كلمتي المرور غير متطابقتين")]
             public string ConfirmPassword { get; set; }
         }
 
@@ -168,7 +168,7 @@ namespace Ecommerce.Areas.Identity.Pages.Account
                     var callbackUrl = Url.Page(
                         "/Account/ConfirmEmail",
                         pageHandler: null,
-                        values: new { userId = user.Id, code = code },
+                        values: new { userId = user.Id, code },
                         protocol: Request.Scheme);
 
                     await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",

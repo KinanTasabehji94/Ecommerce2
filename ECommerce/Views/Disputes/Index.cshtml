@@ -40,53 +40,53 @@
     <tbody>
         @foreach (var item in Model)
         {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.OpenedDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Arbiter.FullName
-           )
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Complaint)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Order.Service.Sprovider.CompanyName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Order.Customer.FullName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Result)
-            </td>
-            <td>
-                @if (item.Status == "Opened")
-                {
-                    <p class="btn btn-primary disabled">@item.Status</p>
-                }
-                else if (item.Status == "Closed")
-                {
-                    <p class="btn btn-success disabled">@item.Status</p>
-                }
-                else if (item.Status == "OnProgress")
-                {
-                    <p class="btn btn-warning disabled">@item.Status</p>
-                }
-            </td>
-            <td>
-                @if (item.Status != "Closed")
-                {
-                    <a asp-action="Edit" asp-route-id="@item.Id">تعديل</a> <span> | </span>
-                }
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OpenedDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Arbiter.FullName
+               )
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Complaint)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Order.Service.Sprovider.CompanyName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Order.Customer.FullName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Result)
+                </td>
+                <td>
+                    @if (item.Status == "انتظار")
+                    {
+                        <p class="btn btn-primary disabled">انتظار</p>
+                    }
+                    else if (item.Status == "منهي")
+                    {
+                        <p class="btn btn-success disabled">منهي</p>
+                    }
+                    else if (item.Status == "جاري العمل")
+                    {
+                        <p class="btn btn-warning disabled">جاري العمل</p>
+                    }
+                </td>
+                <td>
+                    @if (item.Status != "Closed")
+                    {
+                        <a asp-action="Edit" asp-route-id="@item.Id">تعديل</a> <span> | </span>
+                    }
 
-                <a asp-action="Details" asp-route-id="@item.Id">تفاصيل</a>
-                @if (item.ArbiterId == null)
-                {
-                    <span> | </span> <a asp-action="TakeDispute" asp-route-id="@item.Id" asp-route-arbiterId="@UserManager.GetUserId(User)">استلام</a>
-                }
-            </td>
-        </tr>
+                    <a asp-action="Details" asp-route-id="@item.Id">تفاصيل</a>
+                    @if (item.ArbiterId == null)
+                    {
+                        <span> | </span> <a asp-action="TakeDispute" asp-route-id="@item.Id" asp-route-arbiterId="@UserManager.GetUserId(User)">استلام</a>
+                    }
+                </td>
+            </tr>
         }
     </tbody>
 </table>

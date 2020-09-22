@@ -4,34 +4,34 @@
     ViewData["Title"] = "Delete";
 }
 
-<h2>Delete</h2>
+<h2>حذف</h2>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3>هل تريد حذف مقدم الخدمة؟</h3>
 <div>
-    <h4>Sprovider</h4>
     <hr />
     @*Service Provider*@
     <table class="table table-bordered table-striped table-responsive">
         <thead>
+
             <tr>
                 <th colspan="4">
-                    Service Provider Manager
+                    مدير مقدم الخدمة
                 </th>
             </tr>
         </thead>
         <thead>
             <tr>
                 <th>
-                    Name
+                    الاسم
                 </th>
                 <th>
-                    Phone Number
+                    @Html.DisplayNameFor(model => model.User.PhoneNumber)
                 </th>
                 <th>
-                    Email
+                    @Html.DisplayNameFor(model => model.User.Email)
                 </th>
                 <th>
-                    Address
+                    @Html.DisplayNameFor(model => model.User.Address)
                 </th>
             </tr>
         </thead>
@@ -60,23 +60,25 @@
         <thead>
             <tr>
                 <th colspan="4">
-                    Service Provider
+                    مقدم الخدمة
                 </th>
             </tr>
         </thead>
         <thead>
             <tr>
                 <th>
-                    Category
+                    الفئة
                 </th>
                 <th>
-                    Name
+                    الاسم
                 </th>
                 <th>
-                    Rating
+                    @Html.DisplayNameFor(model => model.Rating)
+
                 </th>
                 <th>
-                    Image
+                    @Html.DisplayNameFor(model => model.Image)
+
                 </th>
             </tr>
         </thead>
@@ -116,7 +118,7 @@
 
     <form asp-action="Delete">
         <input type="hidden" asp-for="Id" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
+        <input type="submit" value="حذف" class="btn btn-danger" /> |
+        <a asp-action="Index">العودة إلى القائمة</a>
     </form>
 </div>

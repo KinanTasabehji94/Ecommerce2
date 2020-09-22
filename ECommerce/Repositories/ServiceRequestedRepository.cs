@@ -10,7 +10,7 @@ namespace ECommerce.Repositories
     public class ServiceRequestedRepository: IServiceRequested
     {
 
-        myDbContext db;
+        private readonly myDbContext db;
 
         public ServiceRequestedRepository(myDbContext _db)
         {

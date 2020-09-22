@@ -11,8 +11,11 @@ namespace Ecommerce.Models.ViewModels
     {
         public int Id { get; set; }
         [Required]
+        [Display(Name = "فئة الخدمة")]
         public string Name { get; set; }
+        [Display(Name = "وصف الفئة")]
         public string Description { get; set; }
+        [Display(Name = "صورة")]
         public IFormFile Image { get; set; }
     }
 }

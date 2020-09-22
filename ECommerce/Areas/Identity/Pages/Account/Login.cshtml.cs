@@ -77,35 +77,32 @@ namespace ECommerce.Areas.Identity.Pages.Account
 
             if (ModelState.IsValid)
             {
-                var user = userRepository.GetUserByEmail(Input.Email);
-
-                if (user.Status == "Blocked")
+                var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: true);
+                if (result.Succeeded)
                 {
-                    ModelState.AddModelError(string.Empty, "عذراً! لا يمكنك تسجيل الدخول، لقد تم حظرك من قبل مدير الموقع");
-                    return Page();
+                    var user = userRepository.GetUserByEmail(Input.Email.ToUpper());
+
+                    if (user.Status == "Blocked")
+                    {
+                        ModelState.AddModelError(string.Empty, "عذراً! لا يمكنك تسجيل الدخول، لقد تم حظرك من قبل مدير الموقع");
+                        return Page();
+                    }
+                    _logger.LogInformation("User logged in.");
+                    return LocalRedirect(returnUrl);
+                }
+                if (result.RequiresTwoFactor)
+                {
+                    return RedirectToPage("./LoginWith2fa", new { ReturnUrl = returnUrl, Input.RememberMe });
+                }
+                if (result.IsLockedOut)
+                {
+                    _logger.LogWarning("User account locked out.");
+                    return RedirectToPage("./Lockout");
                 }
                 else
                 {
-                    var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: true);
-                    if (result.Succeeded)
-                    {
-                        _logger.LogInformation("User logged in.");
-                        return LocalRedirect(returnUrl);
-                    }
-                    if (result.RequiresTwoFactor)
-                    {
-                        return RedirectToPage("./LoginWith2fa", new { ReturnUrl = returnUrl, RememberMe = Input.RememberMe });
-                    }
-                    if (result.IsLockedOut)
-                    {
-                        _logger.LogWarning("User account locked out.");
-                        return RedirectToPage("./Lockout");
-                    }
-                    else
-                    {
-                        ModelState.AddModelError(string.Empty, "Invalid login attempt.");
-                        return Page();
-                    }
+                    ModelState.AddModelError(string.Empty, "اسم المستخدم أو كلمة السر غير صحيحين!");
+                    return Page();
                 }
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true

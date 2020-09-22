@@ -12,7 +12,7 @@ namespace ECommerce.Models
         }
         [Display(Name="رقم الخدمة")]
         public int Id { get; set; }
-        [Display(Name = "رقم مقدم الخدمة")]
+        [Display(Name = "مقدم الخدمة")]
         public int SproviderId { get; set; }
         [Display(Name = "اسم الخدمة")]
         public string Name { get; set; }

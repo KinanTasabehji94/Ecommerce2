@@ -4,33 +4,34 @@
     ViewData["Title"] = "Details";
 }
 
-<h2>Details</h2>
+<h2>التفاصيل</h2>
 
 <div>
-    <h4>Sprovider</h4>
 
     @*Service Provider*@
     <table class="table table-bordered table-striped table-responsive">
         <thead>
             <tr>
                 <th colspan="4">
-                    Service Provider Manager
+                    مدير مقدم الخدمة
                 </th>
             </tr>
         </thead>
         <thead>
             <tr>
                 <th>
-                    Name
+                    الاسم
                 </th>
                 <th>
-                    Phone Number
+                    @Html.DisplayNameFor(model => model.User.PhoneNumber)
                 </th>
                 <th>
-                    Email
+                    @Html.DisplayNameFor(model => model.User.Email)
+
                 </th>
                 <th>
-                    Address
+                    @Html.DisplayNameFor(model => model.User.Address)
+
                 </th>
             </tr>
         </thead>
@@ -59,23 +60,24 @@
         <thead>
             <tr>
                 <th colspan="4">
-                    Service Provider
+                    مثدم الخدمة
                 </th>
             </tr>
         </thead>
         <thead>
             <tr>
                 <th>
-                    Category
+                    الفئة
                 </th>
                 <th>
-                    Name
+                    الاسم
                 </th>
                 <th>
-                    Rating
+                    @Html.DisplayNameFor(model => model.Rating)
                 </th>
                 <th>
-                    Image
+                    @Html.DisplayNameFor(model => model.Image)
+
                 </th>
             </tr>
         </thead>
@@ -115,6 +117,6 @@
    <iframe  style="height:500px; width:100%" src="@Model.MapLocation"></iframe> 
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model.Id">تعديل</a> |
+    <a asp-action="Index">العودة إلى القائمة</a>
 </div>

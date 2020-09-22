@@ -12,6 +12,7 @@ connection.start();
 $("#btnSend").on("click", function () {
     var fromUser = $("#txtUser").val();
     var message = $("#txtMessage").val();
+    $("#txtMessage").val("");
 
     connection.invoke("SendMessage", fromUser, message);
 });

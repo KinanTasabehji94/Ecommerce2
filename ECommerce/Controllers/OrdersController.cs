@@ -125,16 +125,7 @@ namespace ECommerce.Controllers
                     return RedirectToAction(nameof(ServiceProviderOrders), new { sproviderId = oldOrder.Service.Sprovider.UserId });
                 }
             }
-            else if (order.OrderNotes != null)
-            {
-                oldOrder.OrderNotes = order.OrderNotes;
-                if (ModelState.IsValid)
-                {
-                    orderRepository.Update(id, oldOrder);
-                    return RedirectToAction(nameof(CustomerOrders), new { customerId = oldOrder.CustomerId });
-                }
-            }
-       
+      
             return View(order);
         }
 
@@ -170,7 +161,7 @@ namespace ECommerce.Controllers
                 {
                     sprovider.Rating += item;
                 }
-                sprovider.Rating = sprovider.Rating / ordersRating.Count();
+                sprovider.Rating /= ordersRating.Count();
                 sproviderRepository.Update(sprovider.Id, sprovider);
                 //End serviceProvider Rating
 

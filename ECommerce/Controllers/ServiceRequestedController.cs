@@ -34,7 +34,7 @@ namespace ECommerce.Controllers
         }
 
         // GET: ServiceRequestedController/Create
-         [Authorize(Policy = "Customer")]
+         //[Authorize(Policy = "Customer")]
 
         public ActionResult Create()
         {
@@ -44,7 +44,7 @@ namespace ECommerce.Controllers
         // POST: ServiceRequestedController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Policy = "Customer")]
+        //[Authorize(Policy = "Customer")]
 
         public ActionResult Create(ServiceRequested service)
         {
@@ -52,7 +52,8 @@ namespace ECommerce.Controllers
             {
                 serviceRequestedRepository.Add(service);
 
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", "Home");
+
             }
             return View();
         }

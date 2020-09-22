@@ -18,6 +18,9 @@ namespace ECommerce.Models
         public string CompanyName { get; set; }
         [Display(Name = "التقييم")]
         public int? Rating { get; set; }
+
+        [Display(Name = "رابط العنوان")]
+        public string MapLocation { get; set; }
         [Display(Name = "صورة")]
         public string Image { get; set; }
         [Display(Name = "رقم الفئة")]

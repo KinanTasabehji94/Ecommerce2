@@ -8,9 +8,9 @@
 
 <h2>حذف طلبيات</h2>
 
-<h3>حدد الطلبية التي ترغب بالغاءها</h3>
+<h3>حدد الطلبية التي ترغب بالغائها</h3>
 <div>
-    <h4>Order</h4>
+
     <br />
 
     @*Order*@
@@ -203,7 +203,7 @@
 
     <form asp-action="Delete">
         <input type="hidden" asp-for="Id" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <input type="submit" value="حذف" class="btn btn-danger" /> |
         <a asp-action="CustomerOrders" asp-route-customerId="@UserManager.GetUserId(User)">عودة للقائمة</a>
     </form>
 </div>

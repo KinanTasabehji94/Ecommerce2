@@ -13,7 +13,7 @@ namespace ECommerce.Models
         public DateTime OpenedDate { get; set; }
         [Display(Name ="رقم الموظف")]
         public string ArbiterId { get; set; }
-        [Display(Name = "المشتكي")]
+        [Display(Name = "الشكوى")]
         public string Complaint { get; set; }
         [Display(Name = "النتيجة")]
         public string Result { get; set; }

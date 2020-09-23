@@ -43,21 +43,6 @@ namespace ECommerce.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        public ActionResult Delete(string id)
-        {
-            var user = userRepository.GetUserDetails(id);
-
-            return View(user);
-        }
-
-        // POST: Categories/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(string id)
-        {
-            userRepository.Delete(id);
-            return View();
-        }
 
     }
 }

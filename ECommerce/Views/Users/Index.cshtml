@@ -79,14 +79,13 @@
                 <td>
                     @if (item.Status == "Active")
                     {
-                        <a asp-action="Block" asp-route-UserId="@item.Id" class="btn btn-danger">حظر</a> <span> | </span>
+                        <a asp-action="Block" asp-route-UserId="@item.Id" class="btn btn-danger">حظر</a> 
                     }
                     else
                     {
-                        <a asp-action="UnBlock" asp-route-UserId="@item.Id" class="btn btn-success">تفعيل</a> <span> | </span>
+                        <a asp-action="UnBlock" asp-route-UserId="@item.Id" class="btn btn-success">تفعيل</a>
                     }
-                    @*<a asp-action="Details" asp-route-id="@item.Id">Details</a> |*@
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                  
                 </td>
             </tr>
         }

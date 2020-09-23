@@ -4,7 +4,7 @@
     ViewData["Title"] = "Customer Orders";
 }
 
-<h2>طلبيات الزبون</h2>
+<h2>طلبات الزبون</h2>
 <br />
 
 <table class="table table-striped table-bordered table-responsive">
@@ -14,7 +14,7 @@
                 @Html.DisplayNameFor(model => model.Service.Sprovider.CompanyName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Service)
+                الخدمة
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.OrderDate)
@@ -59,15 +59,15 @@
                     </div>
                 </td>
                 <td>
-                    @if (item.OrderStatus == "Opened")
+                    @if (item.OrderStatus == "انتظار")
                     {
                         <p class="btn btn-primary disabled">انتظار</p>
                     }
-                    else if (item.OrderStatus == "Closed")
+                    else if (item.OrderStatus == "منهي")
                     {
-                        <p class="btn btn-success disabled">انتهى</p>
+                        <p class="btn btn-success disabled">منهي</p>
                     }
-                    else if (item.OrderStatus == "Rejected")
+                    else if (item.OrderStatus == "مرفوض")
                     {
                         <p class="btn btn-danger disabled">مرفوض</p>
                     }

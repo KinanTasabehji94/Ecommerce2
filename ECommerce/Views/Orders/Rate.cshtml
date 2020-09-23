@@ -26,14 +26,11 @@
                 <span asp-validation-for="RatingNotes" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Rate" class="btn btn-primary" />
+                <input type="submit" value="تقييم" class="btn btn-primary" /> <span> | </span>
+                <a asp-action="CustomerOrders" asp-route-customerId="@Model.CustomerId">عودة</a>
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-action="CustomerOrders" asp-route-customerId="@Model.CustomerId">عودة</a>
 </div>
 
 @section Scripts {
